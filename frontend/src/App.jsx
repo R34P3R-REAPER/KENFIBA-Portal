@@ -7,16 +7,17 @@ const SecretariatDashboard = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
 
-  // Placeholder password - The Deputy President can change this later
+  // Use the live Render URL we successfully deployed
+  const API_BASE_URL = "https://kenfiba-portal.onrender.com";
   const ADMIN_PASSWORD = "KENFIBA_OFFICIAL_2026"; 
 
   const fetchRegistry = async () => {
     try {
-      // Points to your Render Backend
-      const res = await axios.get('https://your-render-api-link.com/api/inquiries');
+      const res = await axios.get(`${API_BASE_URL}/api/inquiries`);
       setInquiries(res.data);
     } catch (err) {
       console.error("Registry Access Error", err);
+      alert("Failed to connect to the National Registry. Ensure Render is Live.");
     }
   };
 
@@ -30,20 +31,25 @@ const SecretariatDashboard = () => {
     }
   };
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   if (!isAuthenticated) {
     return (
       <div style={{ padding: '50px', textAlign: 'center', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
         <h2>🇰🇪 National Secretariat Login</h2>
+        <p>Official Access - Reg No. 21578</p>
         <form onSubmit={handleLogin}>
           <input 
             type="password" 
             placeholder="Enter Secretariat Access Key"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            style={{ padding: '10px', width: '300px', borderRadius: '5px', border: '1px solid #ccc' }}
+            style={{ padding: '12px', width: '300px', borderRadius: '5px', border: '1px solid #ccc' }}
           />
           <br /><br />
-          <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#004a99', color: 'white', border: 'none', cursor: 'pointer' }}>
+          <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#004a99', color: 'white', border: 'none', cursor: 'pointer', borderRadius: '5px' }}>
             Verify Credentials
           </button>
         </form>
@@ -52,35 +58,55 @@ const SecretariatDashboard = () => {
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #004a99', marginBottom: '20px' }}>
-        <h2>📋 National Member Inquiry Registry</h2>
-        <button onClick={() => setIsAuthenticated(false)} style={{ color: 'red', background: 'none', border: 'none', cursor: 'pointer' }}>Logout</button>
+    <div style={{ padding: '20px', backgroundColor: '#fff', minHeight: '100vh' }}>
+      {/* HEADER SECTION */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '3px solid #004a99', marginBottom: '20px', paddingBottom: '10px' }}>
+        <div>
+          <h2 style={{ margin: 0 }}>📋 National Member Inquiry Registry</h2>
+          <small>Societies Act Cap 108 | 2002 Charter Compliance</small>
+        </div>
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button onClick={handlePrint} style={{ backgroundColor: '#5cb85c', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '5px', cursor: 'pointer' }}>
+            🖨️ Export/Print Report
+          </button>
+          <button onClick={() => setIsAuthenticated(false)} style={{ backgroundColor: '#d9534f', color: 'white', border: 'none', padding: '10px 15px', borderRadius: '5px', cursor: 'pointer' }}>
+            Logout
+          </button>
+        </div>
       </div>
       
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      {/* DATA TABLE */}
+      <table style={{ width: '100%', borderCollapse: 'collapse', boxShadow: '0 2px 10px rgba(0,0,0,0.1)' }}>
         <thead>
           <tr style={{ backgroundColor: '#004a99', color: 'white' }}>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Date</th>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Name</th>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>County/Station</th>
-            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Inquiry Details</th>
+            <th style={{ padding: '12px', border: '1px solid #ddd' }}>Serial/Tracking</th>
+            <th style={{ padding: '12px', border: '1px solid #ddd' }}>Date</th>
+            <th style={{ padding: '12px', border: '1px solid #ddd' }}>Name</th>
+            <th style={{ padding: '12px', border: '1px solid #ddd' }}>County/Station</th>
+            <th style={{ padding: '12px', border: '1px solid #ddd' }}>Inquiry Details</th>
           </tr>
         </thead>
         <tbody>
-          {inquiries.map((iq) => (
-            <tr key={iq._id}>
+          {inquiries.length > 0 ? inquiries.map((iq) => (
+            <tr key={iq._id} style={{ textAlign: 'center' }}>
+              <td style={{ padding: '10px', border: '1px solid #ddd', fontWeight: 'bold' }}>{iq.trackingId || 'N/A'}</td>
               <td style={{ padding: '10px', border: '1px solid #ddd' }}>{new Date(iq.createdAt).toLocaleDateString()}</td>
               <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.name}</td>
-              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.county}</td>
-              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.message}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.office}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.details}</td>
             </tr>
-          ))}
+          )) : (
+            <tr>
+              <td colSpan="5" style={{ padding: '20px', textAlign: 'center' }}>No records found in the National Registry.</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
   );
 };
+
+export default SecretariatDashboard;
 // --- MAIN PORTAL ---
 function App() {
   const [view, setView] = useState('landing');
