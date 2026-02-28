@@ -1,54 +1,86 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// --- THE SECRETARIAT ARCHIVE (ADMIN) ---
-const SecretariatArchive = ({ onBack }) => {
-  const [logs, setLogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+// --- SECRETARIAT ADMIN DASHBOARD ---
+const SecretariatDashboard = () => {
+  const [inquiries, setInquiries] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
 
-  React.useEffect(() => {
-    axios.get('https://kenfiba-backend.onrender.com/api/admin/archives')
-      .then(res => { setLogs(res.data); setLoading(false); })
-      .catch(err => { console.error("Database connection failed", err); setLoading(false); });
-  }, []);
+  // Placeholder password - The Deputy President can change this later
+  const ADMIN_PASSWORD = "KENFIBA_OFFICIAL_2026"; 
+
+  const fetchRegistry = async () => {
+    try {
+      // Points to your Render Backend
+      const res = await axios.get('https://your-render-api-link.com/api/inquiries');
+      setInquiries(res.data);
+    } catch (err) {
+      console.error("Registry Access Error", err);
+    }
+  };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      fetchRegistry();
+    } else {
+      alert("Invalid Secretariat Credentials");
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div style={{ padding: '50px', textAlign: 'center', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
+        <h2>🇰🇪 National Secretariat Login</h2>
+        <form onSubmit={handleLogin}>
+          <input 
+            type="password" 
+            placeholder="Enter Secretariat Access Key"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ padding: '10px', width: '300px', borderRadius: '5px', border: '1px solid #ccc' }}
+          />
+          <br /><br />
+          <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#004a99', color: 'white', border: 'none', cursor: 'pointer' }}>
+            Verify Credentials
+          </button>
+        </form>
+      </div>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-[#f3f2f1] p-10 font-serif">
-      <div className="max-w-6xl mx-auto bg-white shadow-2xl border-t-[12px] border-red-700">
-        <div className="p-10 border-b border-gray-200">
-          <h1 className="text-4xl font-black text-[#1a1a1a] uppercase tracking-tighter">National Secretariat Registry</h1>
-          <p className="text-sm text-gray-500 mt-2 font-sans tracking-widest uppercase font-bold italic">
-            Certificate No. 21578 | Established 15th July 2002 | Sheria House, Nairobi
-          </p>
-        </div>
-        <div className="p-8">
-          {loading ? <p className="text-center py-24 font-sans italic text-gray-400">Authenticating with Registrar of Societies...</p> : (
-            <table className="w-full text-left font-sans text-sm border-collapse">
-              <thead className="bg-gray-100 text-gray-600 uppercase text-[10px] tracking-[0.2em] font-black border-b border-gray-300">
-                <tr><th className="p-5">Registry Date</th><th className="p-5">Ref ID</th><th className="p-5">Jurisdiction / Office</th><th className="p-5">Status</th></tr>
-              </thead>
-              <tbody>
-                {logs.map(log => (
-                  <tr key={log._id} className="border-b border-gray-100 hover:bg-red-50 transition-colors">
-                    <td className="p-5 font-medium">{new Date(log.createdAt).toLocaleDateString()}</td>
-                    <td className="p-5 font-mono font-bold text-red-700">{log.trackingId}</td>
-                    <td className="p-5 uppercase font-bold text-gray-700">{log.office}</td>
-                    <td className="p-5"><span className="bg-green-100 text-green-800 px-3 py-1 text-[10px] font-black tracking-tighter rounded">VERIFIED RECORD</span></td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          )}
-        </div>
-        <div className="p-8 bg-gray-50 flex justify-between items-center">
-            <span className="text-[10px] text-gray-400 uppercase font-sans">Official Correspondence Archive • Republic of Kenya</span>
-            <button onClick={onBack} className="bg-[#1a1a1a] text-white px-10 py-3 font-black uppercase text-xs tracking-widest hover:bg-red-700 transition">Close Secure Session</button>
-        </div>
+    <div style={{ padding: '20px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '2px solid #004a99', marginBottom: '20px' }}>
+        <h2>📋 National Member Inquiry Registry</h2>
+        <button onClick={() => setIsAuthenticated(false)} style={{ color: 'red', background: 'none', border: 'none', cursor: 'pointer' }}>Logout</button>
       </div>
+      
+      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+        <thead>
+          <tr style={{ backgroundColor: '#004a99', color: 'white' }}>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Date</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Name</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>County/Station</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Inquiry Details</th>
+          </tr>
+        </thead>
+        <tbody>
+          {inquiries.map((iq) => (
+            <tr key={iq._id}>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{new Date(iq.createdAt).toLocaleDateString()}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.name}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.county}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{iq.message}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
-
 // --- MAIN PORTAL ---
 function App() {
   const [view, setView] = useState('landing');
