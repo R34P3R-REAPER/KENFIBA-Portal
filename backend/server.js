@@ -1,74 +1,33 @@
-const express = require('express');
-const cors = require('cors');
-const helmet = require('helmet');
-const mongoose = require('mongoose');
-require('dotenv').config();
+// 1. Add 'isLoading' to your state at the top of the App component
+const [isLoading, setIsLoading] = useState(false);
 
-const app = express();
-const PORT = process.env.PORT || 10000;
-
-// --- 1. DATABASE CONNECTION ---
-const mongoURI = process.env.MONGO_URI;
-
-// Enhanced Options for Sharded Replica Sets
-const mongooseOptions = {
-  serverSelectionTimeoutMS: 10000, // Wait 10s before failing
-  socketTimeoutMS: 45000,         // Close sockets after 45s
-  family: 4                       // Force IPv4 (important for Render)
+// 2. Updated handleInquiry with "Wait & Retry" logic
+const handleInquiry = async (e) => {
+  e.preventDefault();
+  setIsLoading(true); // Start the spinner
+  
+  try {
+    const res = await axios.post("https://kenfiba-portal.onrender.com/api/inquiries", form, {
+      timeout: 30000 // Give the Sharded Cluster 30s to respond
+    });
+    setTrackingId(res.data.trackingId);
+    setIsSubmitted(true);
+  } catch (err) {
+    console.error("Connection attempt failed:", err.message);
+    // Alert only if it's a hard failure, not just a slow wake-up
+    alert("National Registry is currently waking up. Please wait 10 seconds and click Submit again.");
+  } finally {
+    setIsLoading(false); // Stop the spinner
+  }
 };
 
-mongoose.connect(process.env.MONGO_URI, {
-  serverSelectionTimeoutMS: 30000, // 30 seconds for "Cold Start"
-  autoIndex: true,
-})
-.then(() => {
-  console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED');
-})
-.catch(err => {
-  console.error('✖ CONNECTION ERROR:', err.message);
-});
-
-// --- 2. DATA SCHEMA ---
-const inquirySchema = new mongoose.Schema({
-  trackingId: { type: String, unique: true },
-  name: { type: String, required: true },
-  office: { type: String, required: true },
-  email: { type: String, required: true },
-  details: { type: String, required: true },
-  status: { type: String, default: 'Pending Review' },
-  createdAt: { type: Date, default: Date.now }
-});
-
-const Inquiry = mongoose.model('Inquiry', inquirySchema);
-
-// --- 3. MIDDLEWARE ---
-app.use(helmet()); 
-app.use(cors({ origin: '*' })); 
-app.use(express.json());
-
-// --- 4. API ENDPOINTS ---
-app.get('/', (req, res) => res.status(200).send('🇰🇪 KENFIBA API: Systems Operational'));
-
-app.post('/api/inquiries', async (req, res) => {
-  try {
-    const { name, office, email, details } = req.body;
-    const trackingId = `KENFIBA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-    const newInquiry = new Inquiry({ trackingId, name, office, email, details });
-    await newInquiry.save();
-    res.status(201).json({ success: true, trackingId });
-  } catch (error) {
-    console.error("Save Error:", error.message);
-    res.status(500).json({ success: false, message: "Database Save Failed" });
-  }
-});
-
-app.get('/api/inquiries', async (req, res) => {
-  try {
-    const all = await Inquiry.find().sort({ createdAt: -1 });
-    res.json(all);
-  } catch (err) {
-    res.status(500).send("Access Denied");
-  }
-});
-
-app.listen(PORT, () => console.log(`BACKEND LIVE ON ${PORT}`));
+// 3. Updated Button in your Form JSX
+<button 
+  type="submit" 
+  disabled={isLoading}
+  className={`w-full py-8 font-black uppercase text-[11px] tracking-[0.5em] transition-all shadow-2xl ${
+    isLoading ? 'bg-gray-400 cursor-wait' : 'bg-red-700 hover:bg-black text-white'
+  }`}
+>
+  {isLoading ? "⏳ SECURING CONNECTION TO ARCHIVE..." : "Submit to Secretariat Archive"}
+</button>
