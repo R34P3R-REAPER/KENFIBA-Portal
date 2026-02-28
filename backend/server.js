@@ -31,8 +31,15 @@ const inquirySchema = new mongoose.Schema({
 const Inquiry = mongoose.model('Inquiry', inquirySchema);
 
 // --- 3. MIDDLEWARE ---
-app.use(helmet()); // Protects headers
-app.use(cors());   // Allows Vercel frontend to communicate
+app.use(helmet()); 
+
+// Updated CORS: This ensures your Vercel frontend is never blocked
+app.use(cors({
+  origin: '*', // Allows all origins to connect - ideal for the initial launch phase
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}));
+
 app.use(express.json());
 
 // --- 4. API ENDPOINTS ---
