@@ -8,16 +8,24 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 // --- 1. DATABASE CONNECTION ---
+// --- 1. DATABASE CONNECTION (HARD-WIRED FOR SHARDS) ---
+// Copy this exactly into your backend/server.js
 mongoose.connect(process.env.MONGO_URI, {
-  serverSelectionTimeoutMS: 30000, 
-  socketTimeoutMS: 45000,         
-  family: 4,                       
-  autoIndex: true,
+  serverSelectionTimeoutMS: 60000, // 1 minute timeout for sharded election
+  socketTimeoutMS: 45000,
+  family: 4,                       // Force IPv4 (Crucial for Render-to-Atlas)
   retryWrites: true,
-  w: 'majority'
+  w: 'majority',
+  // Adds stability for Sharded Clusters on Free Tiers
+  connectTimeoutMS: 30000, 
+  keepAlive: true,
+  keepAliveInitialDelay: 300000
 })
 .then(() => console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED'))
-.catch(err => console.error('✖ CONNECTION ERROR:', err.message));
+.catch(err => {
+  console.error('✖ DATABASE BRIDGE BROKEN:', err.message);
+  // This will print the EXACT reason in Render logs (e.g., "bad auth" or "timeout")
+});
 
 // --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
