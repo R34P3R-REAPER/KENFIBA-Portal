@@ -5,30 +5,25 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-
-// Render default port or 10000
 const PORT = process.env.PORT || 10000;
 
 // --- 1. DATABASE CONNECTION ---
-// Pulling the URI from Render Environment Variables
 const mongoURI = process.env.MONGO_URI;
 
-if (!mongoURI) {
-  console.error('✖ CRITICAL: MONGO_URI is missing in Environment Variables!');
-}
-
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, {
+  serverSelectionTimeoutMS: 5000 // Fails fast so we can diagnose the error
+})
   .then(() => console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED'))
   .catch(err => {
     console.error('✖ DATABASE CONNECTION ERROR:', err.message);
-    console.log('💡 TIP: Check MongoDB Atlas "Network Access" and allow 0.0.0.0/0');
+    console.log('💡 TIP: Ensure 0.0.0.0/0 is whitelisted in MongoDB Atlas Network Access.');
   });
 
 // --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
   trackingId: { type: String, unique: true },
   name: { type: String, required: true },
-  office: { type: String, required: true }, // Representing County/Station
+  office: { type: String, required: true },
   email: { type: String, required: true },
   details: { type: String, required: true },
   status: { type: String, default: 'Pending Review' },
@@ -39,46 +34,32 @@ const Inquiry = mongoose.model('Inquiry', inquirySchema);
 
 // --- 3. MIDDLEWARE ---
 app.use(helmet()); 
-app.use(cors({ origin: '*' })); // Allows any frontend (Vercel/Local) to connect
+app.use(cors({ origin: '*' })); // Prevents "Registry Offline" CORS blocks
 app.use(express.json());
 
 // --- 4. API ENDPOINTS ---
 
-// Root Health Check (Verify if server is awake)
 app.get('/', (req, res) => {
   res.status(200).send('🇰🇪 KENFIBA National Registry API: Systems Operational');
 });
 
-// GET: Secure Registry Retrieval (For Secretariat Admin)
 app.get('/api/inquiries', async (req, res) => {
   try {
     const allInquiries = await Inquiry.find().sort({ createdAt: -1 });
     res.status(200).json(allInquiries);
   } catch (error) {
-    console.error("Fetch Error:", error);
     res.status(500).json({ success: false, message: "Registry Access Denied" });
   }
 });
 
-// POST: Log New Inquiry into National Registry
 app.post('/api/inquiries', async (req, res) => {
   try {
     const { name, office, email, details } = req.body;
-    
-    // Official KENFIBA-2026 Tracking Serial Generation
     const trackingId = `KENFIBA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
-    const newInquiry = new Inquiry({
-      trackingId,
-      name,
-      office,
-      email,
-      details
-    });
-
+    const newInquiry = new Inquiry({ trackingId, name, office, email, details });
     await newInquiry.save();
-    console.log(`[SAVED] New Record: ${trackingId} | Office: ${office}`);
-
+    
     res.status(201).json({
       success: true,
       trackingId: trackingId,
@@ -90,12 +71,6 @@ app.post('/api/inquiries', async (req, res) => {
   }
 });
 
-// --- 5. SERVER START ---
 app.listen(PORT, () => {
-  console.log(`
-  ------------------------------------------------
-  🇰🇪 KENFIBA NATIONAL SECRETARIAT BACKEND LIVE
-  PORT: ${PORT}
-  ------------------------------------------------
-  `);
+  console.log(`🇰🇪 KENFIBA BACKEND LIVE ON PORT ${PORT}`);
 });
