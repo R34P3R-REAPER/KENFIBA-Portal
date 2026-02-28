@@ -17,12 +17,16 @@ const mongooseOptions = {
   family: 4                       // Force IPv4 (important for Render)
 };
 
-mongoose.connect(mongoURI, mongooseOptions)
-  .then(() => console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED'))
-  .catch(err => {
-    console.error('✖ DATABASE CONNECTION ERROR:', err.message);
-    console.log('💡 TIP: Go to MongoDB Atlas > Network Access > Add 0.0.0.0/0');
-  });
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 30000, // 30 seconds for "Cold Start"
+  autoIndex: true,
+})
+.then(() => {
+  console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED');
+})
+.catch(err => {
+  console.error('✖ CONNECTION ERROR:', err.message);
+});
 
 // --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
