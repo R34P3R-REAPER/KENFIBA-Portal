@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-// --- 1. SECRETARIAT ADMIN DASHBOARD (Internal Component) ---
+// --- 1. SECRETARIAT ADMIN DASHBOARD ---
 const SecretariatDashboard = ({ onBack }) => {
   const [inquiries, setInquiries] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-
-  const API_BASE_URL = "https://kenfiba-backend.onrender.com";
+  
+  // UPDATED: Corrected URL for the live registry
+  const API_BASE_URL = "https://kenfiba-portal.onrender.com";
   const ADMIN_PASSWORD = "KENFIBA_OFFICIAL_2026"; 
 
   const fetchRegistry = async () => {
@@ -16,7 +17,7 @@ const SecretariatDashboard = ({ onBack }) => {
       setInquiries(res.data);
     } catch (err) {
       console.error("Registry Access Error", err);
-      alert("Failed to connect to the National Registry.");
+      alert("Failed to connect to the National Registry. Check if Render is awake.");
     }
   };
 
@@ -78,7 +79,7 @@ const SecretariatDashboard = ({ onBack }) => {
           </tr>
         </thead>
         <tbody className="text-sm">
-          {inquiries.map((iq) => (
+          {inquiries.length > 0 ? inquiries.map((iq) => (
             <tr key={iq._id} className="hover:bg-gray-50 transition-colors">
               <td className="p-4 border border-gray-200 font-bold font-mono">{iq.trackingId}</td>
               <td className="p-4 border border-gray-200">{new Date(iq.createdAt).toLocaleDateString()}</td>
@@ -86,7 +87,9 @@ const SecretariatDashboard = ({ onBack }) => {
               <td className="p-4 border border-gray-200 font-bold">{iq.office}</td>
               <td className="p-4 border border-gray-200 text-gray-600">{iq.details}</td>
             </tr>
-          ))}
+          )) : (
+            <tr><td colSpan="5" className="p-10 text-center text-gray-400">No records found.</td></tr>
+          )}
         </tbody>
       </table>
     </div>
@@ -100,29 +103,33 @@ function App() {
   const [trackingId, setTrackingId] = useState("");
   const [form, setForm] = useState({ name: "", office: "", email: "", details: "" });
 
+  // UPDATED: Corrected API URL for the main portal
+  const API_BASE_URL = "https://kenfiba-portal.onrender.com";
+
+  // AUTO-WAKE: Pings server on load to prevent cold start delays
+  useEffect(() => {
+    axios.get(API_BASE_URL).catch(() => console.log("Server waking up..."));
+  }, []);
+
   const handleInquiry = async (e) => {
     e.preventDefault();
     try {
-      // Ensuring endpoint consistency with the Dashboard
-      const res = await axios.post("https://kenfiba-backend.onrender.com/api/inquiries", form);
+      // UPDATED: Corrected route to /api/inquiries
+      const res = await axios.post(`${API_BASE_URL}/api/inquiries`, form);
       setTrackingId(res.data.trackingId);
       setIsSubmitted(true);
     } catch (err) { 
-      alert("Registry Database Offline. Please use official telephone lines."); 
+      alert("Registry Database Offline. Please ensure your Render server is live."); 
     }
   };
 
-  // Switch between Landing and Admin Dashboard
   if (view === 'admin') return <SecretariatDashboard onBack={() => setView('landing')} />;
 
   return (
-    <div className="min-h-screen bg-white text-[#1a1a1a] font-serif leading-relaxed selection:bg-red-700 selection:text-white">
-      {/* ... [KEEP ALL YOUR LANDING PAGE CODE HERE] ... */}
-      {/* Ensure the "Secretariat Login" button calls setView('admin') */}
+    <div className="min-h-screen bg-white text-[#1a1a1a] font-serif leading-relaxed">
+      {/* ... [KEEP ALL PREVIOUS LANDING PAGE SECTIONS: NAV, HERO, ABOUT] ... */}
       
-      {/* ... NAVIGATION, HERO, ABOUT, OBJECTIVES SECTIONS ... */}
-
-      {/* REGISTRY INTAKE PORTAL */}
+      {/* SECTION SNIPPET: Registry Inquiry */}
       <section id="registry" className="py-32 bg-[#fafafa] border-y border-gray-200">
         <div className="max-w-4xl mx-auto px-6 md:px-16">
           <div className="text-center mb-20">
@@ -166,7 +173,7 @@ function App() {
           )}
         </div>
       </section>
-
+      
       {/* ... [KEEP FOOTER CODE] ... */}
     </div>
   );
