@@ -1,30 +1,29 @@
-const dns = require('node:dns');
-dns.setServers(['8.8.8.8', '8.8.4.4']); // Forces use of Google DNS
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const mongoose = require('mongoose'); // New: Added Mongoose
+const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
+// Use Render's assigned port or default to 10000
+const PORT = process.env.PORT || 10000;
 
 // --- 1. DATABASE CONNECTION ---
-// Replace 'vfm_taskforce' with your preferred DB name
-const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/vfm_taskforce';
+// Ensure the Variable on Render is named MONGO_URI
+const mongoURI = process.env.MONGO_URI;
 
-// Temporarily put the string directly in the code to skip the .env file
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => console.log('✔ DATABASE: SECURED & CONNECTED'))
-  .catch(err => console.error('✖ DATABASE: CONNECTION ERROR', err));
+mongoose.connect(mongoURI)
+  .then(() => console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED'))
+  .catch(err => console.error('✖ DATABASE CONNECTION ERROR:', err));
 
-// --- 2. DATA SCHEMA (The Blueprint) ---
+// --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
-  trackingId: String,
-  name: String,
-  office: String,
-  email: String,
-  details: String,
+  trackingId: { type: String, unique: true },
+  name: { type: String, required: true },
+  office: { type: String, required: true }, // Representing County/Station
+  email: { type: String, required: true },
+  details: { type: String, required: true },
   status: { type: String, default: 'Pending Review' },
   createdAt: { type: Date, default: Date.now }
 });
@@ -32,34 +31,34 @@ const inquirySchema = new mongoose.Schema({
 const Inquiry = mongoose.model('Inquiry', inquirySchema);
 
 // --- 3. MIDDLEWARE ---
-app.use(helmet());
-app.use(cors());
+app.use(helmet()); // Protects headers
+app.use(cors());   // Allows Vercel frontend to communicate
 app.use(express.json());
 
 // --- 4. API ENDPOINTS ---
 
-// Health Check
+// Root / Health Check
 app.get('/', (req, res) => {
-  res.send('VFM Taskforce API: Systems Operational');
+  res.status(200).send('🇰🇪 KENFIBA National Registry API: Systems Operational');
 });
 
-// Fetch Live Inquiries (For Admin Use)
+// GET: Secure Registry Retrieval (For Secretariat Admin)
 app.get('/api/inquiries', async (req, res) => {
   try {
     const allInquiries = await Inquiry.find().sort({ createdAt: -1 });
-    res.json(allInquiries);
+    res.status(200).json(allInquiries);
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: "Registry Access Denied" });
   }
 });
 
-// Receive & Save Strategic Briefing Requests
+// POST: Log New Inquiry into National Registry
 app.post('/api/inquiries', async (req, res) => {
   try {
     const { name, office, email, details } = req.body;
     
-    // Generate official tracking ID
-    const trackingId = `VFM-2026-${Math.floor(1000 + Math.random() * 9000)}`;
+    // Official KENFIBA-2026 Tracking Serial
+    const trackingId = `KENFIBA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     const newInquiry = new Inquiry({
       trackingId,
@@ -69,39 +68,27 @@ app.post('/api/inquiries', async (req, res) => {
       details
     });
 
-    // Save to MongoDB
     await newInquiry.save();
-    
-    console.log(`[SAVED] Inquiry: ${trackingId} from ${office}`);
+    console.log(`[REGISTRY LOG] New Record: ${trackingId} | Office: ${office}`);
 
     res.status(201).json({
       success: true,
       trackingId: trackingId,
-      message: "Inquiry successfully logged in the National Registry."
+      message: "Successfully logged in the National Registry per 2002 Charter."
     });
   } catch (error) {
-    console.error("Critical Save Error:", error);
-    res.status(500).json({ success: false, message: "Server failed to save inquiry." });
+    console.error("Critical Registry Error:", error);
+    res.status(500).json({ success: false, message: "Registry Offline: Storage Failure." });
   }
 });
 
 // --- 5. SERVER START ---
 app.listen(PORT, () => {
   console.log(`
-  -----------------------------------------
-  VFM TASKFORCE BACKEND: LIVE
+  ------------------------------------------------
+  🇰🇪 KENFIBA NATIONAL SECRETARIAT BACKEND LIVE
   PORT: ${PORT}
-  DATABASE: MONGO_DB
-  STATUS: READY FOR COMMAND
-  -----------------------------------------
+  DATABASE: MONGO_DB (KENFIBA-Main-Cluster)
+  ------------------------------------------------
   `);
-});
-// Add this to backend/server.js
-app.get('/api/admin/inquiries', async (req, res) => {
-  try {
-    const inquiries = await Inquiry.find().sort({ createdAt: -1 });
-    res.json(inquiries);
-  } catch (error) {
-    res.status(500).json({ message: "Failed to fetch registry" });
-  }
 });
