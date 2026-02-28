@@ -6,16 +6,23 @@ require('dotenv').config();
 
 const app = express();
 
-// Use Render's assigned port or default to 10000
+// Render default port or 10000
 const PORT = process.env.PORT || 10000;
 
 // --- 1. DATABASE CONNECTION ---
-// Ensure the Variable on Render is named MONGO_URI
+// Pulling the URI from Render Environment Variables
 const mongoURI = process.env.MONGO_URI;
+
+if (!mongoURI) {
+  console.error('✖ CRITICAL: MONGO_URI is missing in Environment Variables!');
+}
 
 mongoose.connect(mongoURI)
   .then(() => console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED'))
-  .catch(err => console.error('✖ DATABASE CONNECTION ERROR:', err));
+  .catch(err => {
+    console.error('✖ DATABASE CONNECTION ERROR:', err.message);
+    console.log('💡 TIP: Check MongoDB Atlas "Network Access" and allow 0.0.0.0/0');
+  });
 
 // --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
@@ -32,19 +39,12 @@ const Inquiry = mongoose.model('Inquiry', inquirySchema);
 
 // --- 3. MIDDLEWARE ---
 app.use(helmet()); 
-
-// Updated CORS: This ensures your Vercel frontend is never blocked
-app.use(cors({
-  origin: '*', // Allows all origins to connect - ideal for the initial launch phase
-  methods: ['GET', 'POST'],
-  allowedHeaders: ['Content-Type']
-}));
-
+app.use(cors({ origin: '*' })); // Allows any frontend (Vercel/Local) to connect
 app.use(express.json());
 
 // --- 4. API ENDPOINTS ---
 
-// Root / Health Check
+// Root Health Check (Verify if server is awake)
 app.get('/', (req, res) => {
   res.status(200).send('🇰🇪 KENFIBA National Registry API: Systems Operational');
 });
@@ -55,6 +55,7 @@ app.get('/api/inquiries', async (req, res) => {
     const allInquiries = await Inquiry.find().sort({ createdAt: -1 });
     res.status(200).json(allInquiries);
   } catch (error) {
+    console.error("Fetch Error:", error);
     res.status(500).json({ success: false, message: "Registry Access Denied" });
   }
 });
@@ -64,7 +65,7 @@ app.post('/api/inquiries', async (req, res) => {
   try {
     const { name, office, email, details } = req.body;
     
-    // Official KENFIBA-2026 Tracking Serial
+    // Official KENFIBA-2026 Tracking Serial Generation
     const trackingId = `KENFIBA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
 
     const newInquiry = new Inquiry({
@@ -76,15 +77,15 @@ app.post('/api/inquiries', async (req, res) => {
     });
 
     await newInquiry.save();
-    console.log(`[REGISTRY LOG] New Record: ${trackingId} | Office: ${office}`);
+    console.log(`[SAVED] New Record: ${trackingId} | Office: ${office}`);
 
     res.status(201).json({
       success: true,
       trackingId: trackingId,
-      message: "Successfully logged in the National Registry per 2002 Charter."
+      message: "Successfully logged in the National Registry."
     });
   } catch (error) {
-    console.error("Critical Registry Error:", error);
+    console.error("Critical Save Error:", error.message);
     res.status(500).json({ success: false, message: "Registry Offline: Storage Failure." });
   }
 });
@@ -95,7 +96,6 @@ app.listen(PORT, () => {
   ------------------------------------------------
   🇰🇪 KENFIBA NATIONAL SECRETARIAT BACKEND LIVE
   PORT: ${PORT}
-  DATABASE: MONGO_DB (KENFIBA-Main-Cluster)
   ------------------------------------------------
   `);
 });
