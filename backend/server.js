@@ -35,3 +35,4 @@ const connectRegistry = async () => {
 };
 
 connectRegistry();
+app.listen(PORT, () => console.log('🚀 PORTAL ACTIVE ON ' + PORT));
