@@ -105,62 +105,95 @@ function App() {
         </div>
       </section>
 
-      {/* 5. NATIONAL LIAISON & REGIONAL HUB */}
-      <section id="contact" className="max-w-7xl mx-auto py-32 px-10 bg-gray-50/50 rounded-[4rem] my-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          <div className="lg:col-span-5 space-y-10">
-            <div>
-              <div className="flex items-center gap-3 mb-4">
-                <span className="h-2.5 w-2.5 bg-[#006400] rounded-full animate-pulse shadow-[0_0_10px_#006400]"></span>
-                <span className="text-[11px] font-black text-[#006400] uppercase tracking-[0.5em]">Command Status: Online</span>
-              </div>
-              <h2 className="text-6xl font-black tracking-tighter uppercase mb-4 leading-none text-gray-900">
-                Regional <br/><span className="text-[#006400]">Liaison.</span>
-              </h2>
-              <div className="h-2 w-24 bg-[#FFD700] mb-8"></div>
-              <p className="text-sm text-gray-600 font-bold uppercase tracking-widest leading-relaxed">
-                Official coordination terminal for County Governments, State Agencies, and International Partners.
-              </p>
-            </div>
-            <div className="p-8 bg-[#006400] rounded-[2rem] shadow-2xl text-white relative overflow-hidden group">
-              <div className="absolute -right-4 -top-4 text-white opacity-5 text-9xl font-black italic">@</div>
-              <h4 className="text-[10px] font-black text-[#FFD700] uppercase tracking-widest mb-3">Secure Communication Line</h4>
-              <p className="text-xl font-bold tracking-tighter mb-1">kenfiba@yahoo.com</p>
-              <p className="text-xl font-bold tracking-tighter opacity-80 underline decoration-[#FFD700] underline-offset-8">registry@kenfiba.org</p>
+     {/* 5. NATIONAL COMMAND & LIAISON DIRECTORY */}
+<section id="contact" className="max-w-7xl mx-auto py-24 px-10">
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+    
+    {/* LEFT SIDE: THE DIRECTORY */}
+    <div className="lg:col-span-5 space-y-12">
+      <div>
+        <h2 className="text-5xl font-black tracking-tighter uppercase mb-4">Official <span className="text-[#006400]">Channels.</span></h2>
+        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-10">Departmental Communication Registry</p>
+      </div>
+
+      <div className="space-y-8">
+        {/* Email Block */}
+        <div className="group">
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span className="h-1.5 w-1.5 bg-[#006400] rounded-full"></span> 
+            Secure Electronic Correspondence
+          </h4>
+          <div className="space-y-2">
+            <p className="text-2xl font-black tracking-tighter text-gray-900 group-hover:text-[#006400] transition-colors cursor-pointer">registry@kenfiba.org</p>
+            <p className="text-xl font-bold tracking-tighter text-gray-400">kenfiba@yahoo.com</p>
+          </div>
+        </div>
+
+        {/* Telephone Block */}
+        <div className="group">
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span className="h-1.5 w-1.5 bg-[#006400] rounded-full"></span> 
+            Direct Command Lines
+          </h4>
+          <div className="space-y-2">
+            <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 722 756 544</p>
+            <p className="text-xl font-bold tracking-tighter text-gray-400">+254 (0) 733 841 424</p>
+          </div>
+        </div>
+
+        {/* Physical HQ Block */}
+        <div className="group">
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-3 flex items-center gap-2">
+            <span className="h-1.5 w-1.5 bg-[#006400] rounded-full"></span> 
+            Physical Headquarters
+          </h4>
+          <p className="text-lg font-bold tracking-tight text-gray-700 leading-tight">
+            Nairobi City County Fire & Ambulance HQ,<br />
+            Tom Mboya Street, Nairobi, Kenya
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* RIGHT SIDE: THE ACTION TERMINAL */}
+    <div className="lg:col-span-7">
+      <div className="bg-black p-12 rounded-[3rem] shadow-3xl relative overflow-hidden">
+        {/* Decorative Grid Pattern */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none" 
+             style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+        
+        <div className="relative z-10">
+          <div className="flex justify-between items-start mb-10">
+            <h3 className="text-3xl font-black uppercase tracking-tighter text-white">Liaison <span className="text-[#FFD700]">Terminal</span></h3>
+            <div className="px-4 py-1 border border-[#FFD700]/30 rounded-full">
+              <span className="text-[8px] font-black text-[#FFD700] uppercase tracking-widest animate-pulse">Encryption: AES-256</span>
             </div>
           </div>
 
-          <div className="lg:col-span-7">
-            <div className="bg-white p-12 rounded-[3rem] shadow-2xl border border-gray-100 relative overflow-hidden">
-              <div className="relative z-10">
-                <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900 mb-8">Stakeholder <span className="text-gray-300">Terminal</span></h3>
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <input className={styles.input} placeholder="Officer Name & Rank" />
-                    <input className={styles.input} placeholder="Ministry / County" />
-                  </div>
-                  <select className={styles.input + " appearance-none"}>
-                    <option>Operational Support Request</option>
-                    <option>Statutory Compliance Inquiry</option>
-                    <option>Membership & Certification</option>
-                  </select>
-                  <textarea className={styles.input} rows="4" placeholder="Briefly state the nature of your liaison..."></textarea>
-                  <button 
-                    type="button" 
-                    onClick={handleTransmit}
-                    disabled={isTransmitting || isSent}
-                    className={`w-full py-7 rounded-2xl font-black uppercase tracking-[0.5em] shadow-2xl transition-all text-xs flex items-center justify-center gap-4 ${
-                      isSent ? "bg-green-600 text-white cursor-default" : "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white"
-                    }`}
-                  >
-                    {isTransmitting ? "Encrypting & Transmitting..." : isSent ? "✓ Submission Logged" : "Authorize & Transmit"}
-                  </button>
-                </form>
-              </div>
+          <form className="space-y-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <input className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" placeholder="Officer Name / Rank" />
+              <input className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" placeholder="Mobile Number" />
             </div>
-          </div>
+            <input className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" placeholder="Organization / County Government" />
+            <textarea className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" rows="4" placeholder="Nature of statutory inquiry..."></textarea>
+            
+            <button 
+              type="button" 
+              onClick={handleTransmit}
+              disabled={isTransmitting || isSent}
+              className={`w-full py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-xs transition-all shadow-2xl ${
+                isSent ? "bg-green-600 text-white" : "bg-[#FFD700] text-black hover:bg-white active:scale-[0.98]"
+              }`}
+            >
+              {isTransmitting ? "Verifying Credentials..." : isSent ? "✓ Message Logged" : "Submit to Registry"}
+            </button>
+          </form>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* 6. STATUTORY VAULT */}
       <section id="vault" className="py-32 px-10 max-w-7xl mx-auto">
