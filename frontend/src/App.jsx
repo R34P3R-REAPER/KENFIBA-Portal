@@ -8,10 +8,8 @@ const styles = {
   sectionTitle: "text-5xl font-black text-gray-900 tracking-tighter uppercase mb-4",
   input: "w-full p-4 bg-gray-50 rounded-xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm",
 };
-
 function App() {
   // --- ALL HOOKS MUST BE INSIDE HERE ---
-  const [showContact, setShowContact] = useState(false);
   const [showPortalError, setShowPortalError] = useState(false);
   const [isTransmitting, setIsTransmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
@@ -31,11 +29,9 @@ function App() {
       setTimeout(() => setIsSent(false), 5000);
     }, 2000);
   };
-}
+
   return (
-  
     <div className="min-h-screen bg-[#FDFDFD] text-gray-900 font-sans selection:bg-[#FFD700]">
-      
       {/* 1. SECURE TOP BAR */}
       <div className="bg-black text-[9px] text-gray-400 py-2.5 px-10 flex justify-between items-center font-bold tracking-[0.3em] uppercase">
         <div className="flex gap-4">
