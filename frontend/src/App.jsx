@@ -10,6 +10,7 @@ const styles = {
 };
 function App() {
   // --- ALL HOOKS MUST BE INSIDE HERE ---
+  const [isUrgent, setIsUrgent] = useState(false);
   const [showPortalError, setShowPortalError] = useState(false);
   const [isTransmitting, setIsTransmitting] = useState(false);
   const [isSent, setIsSent] = useState(false);
@@ -104,96 +105,124 @@ function App() {
           ))}
         </div>
       </section>
-
-     {/* 5. OFFICIAL CONTACT & COMMUNICATIONS HUB */}
+{/* 5. OFFICIAL CONTACT & INQUIRY TERMINAL */}
 <section id="contact" className="max-w-7xl mx-auto py-24 px-10">
   <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
     
-    {/* LEFT COLUMN: THE DIRECTORY */}
-    <div className="lg:col-span-5">
-      <div className="mb-12">
+    {/* LEFT COLUMN: COMMAND DIRECTORY */}
+    <div className="lg:col-span-5 space-y-12">
+      <div>
         <h2 className="text-5xl font-black tracking-tighter uppercase mb-4 leading-none text-gray-900">
-          Contact <br /><span className="text-[#006400]">Information.</span>
+          Get In <br /><span className="text-[#006400]">Touch.</span>
         </h2>
-        <div className="h-1.5 w-20 bg-[#FFD700]"></div>
+        <div className="h-1.5 w-20 bg-[#FFD700] mb-6"></div>
+        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em]">Official Registry & Support</p>
       </div>
 
-      <div className="space-y-12">
-        {/* EMAIL DIRECTORY */}
-        <div className="flex gap-6">
-          <div className="h-12 w-12 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
-            <svg className="w-6 h-6 text-[#006400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
+      <div className="space-y-10">
+        {/* EMAIL CHANNELS */}
+        <div className="group">
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
+            <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span> 
+            Electronic Correspondence
+          </h4>
+          <div className="space-y-2">
+            <a href="mailto:registry@kenfiba.org" className="block text-2xl font-black tracking-tighter text-gray-900 hover:text-[#006400] transition-colors">
+              registry@kenfiba.org
+            </a>
+            <p className="text-lg font-bold text-gray-500 tracking-tight italic">kenfiba@yahoo.com</p>
           </div>
-          <div>
-            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Official Registry Emails</h4>
-            <div className="space-y-1">
-              <a href="mailto:registry@kenfiba.org" className="block text-2xl font-black tracking-tighter text-gray-900 hover:text-[#006400] transition-colors">
-                registry@kenfiba.org
-              </a>
-              <a href="mailto:kenfiba@yahoo.com" className="block text-xl font-bold tracking-tighter text-gray-500 hover:text-black">
-                kenfiba@yahoo.com
-              </a>
+        </div>
+
+        {/* TELEPHONE LINES */}
+        <div className="group">
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
+            <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span> 
+            Direct Command Lines
+          </h4>
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <p className="text-3xl font-black tracking-tighter text-gray-900">0724 333 200</p>
+              <span className="text-[9px] font-black text-gray-400 uppercase tracking-widest">Primary Secretariat</span>
+            </div>
+            <div className="flex gap-8 border-t border-gray-100 pt-4">
+              <div>
+                <p className="text-lg font-bold tracking-tighter text-gray-600">0768 321 553</p>
+                <p className="text-[8px] font-black text-gray-400 uppercase">Operational A</p>
+              </div>
+              <div>
+                <p className="text-lg font-bold tracking-tighter text-gray-600">0795 491 185</p>
+                <p className="text-[8px] font-black text-gray-400 uppercase">Operational B</p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* TELEPHONE DIRECTORY */}
-        <div className="flex gap-6">
-          <div className="h-12 w-12 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
-            <svg className="w-6 h-6 text-[#006400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Command Lines</h4>
-            <div className="space-y-1">
-              <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 722 756 544</p>
-              <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 733 841 424</p>
-            </div>
-          </div>
-        </div>
-
-        {/* LOCATION */}
-        <div className="flex gap-6">
-          <div className="h-12 w-12 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
-            <svg className="w-6 h-6 text-[#006400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </div>
-          <div>
-            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Physical Headquarters</h4>
-            <p className="text-lg font-bold tracking-tight text-gray-700 leading-tight">
-              Fire & Ambulance HQ, Tom Mboya Street,<br />Nairobi, Kenya
-            </p>
-          </div>
+        {/* POSTAL ADDRESS */}
+        <div className="group pt-4">
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
+            <span className="h-2 w-2 bg-[#006400] rounded-full"></span> 
+            Postal Registry
+          </h4>
+          <p className="text-lg font-bold tracking-tight text-gray-700 uppercase leading-tight">
+            P.O. BOX 15400-00500<br />
+            Nairobi, Republic of Kenya
+          </p>
         </div>
       </div>
     </div>
 
-    {/* RIGHT COLUMN: CONTACT TERMINAL */}
+    {/* RIGHT COLUMN: INQUIRY TERMINAL */}
     <div className="lg:col-span-7">
-      <div className="bg-white p-12 rounded-[3.5rem] shadow-2xl border border-gray-100 relative">
-        <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900 mb-8 underline decoration-[#006400] underline-offset-8">Send a Message</h3>
-        <form className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <input className={styles.input} placeholder="Your Full Name" />
-            <input className={styles.input} placeholder="Email Address" />
+      <div className={`p-12 rounded-[3.5rem] border transition-all duration-500 relative overflow-hidden ${isUrgent ? 'bg-red-50 border-red-200 shadow-red-100 shadow-2xl' : 'bg-[#F8F9FA] border-gray-200 shadow-sm'}`}>
+        <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900 mb-10">
+          Inquiry <span className={isUrgent ? "text-red-600" : "text-gray-300"}>{isUrgent ? "EMERGENCY" : "Form"}</span>
+        </h3>
+        
+        <form className="space-y-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <input className={styles.input} placeholder="Full Name" />
+            <input className={styles.input} placeholder="Mobile Number (07XX...)" />
           </div>
-          <input className={styles.input} placeholder="Subject / Department" />
-          <textarea className={styles.input} rows="4" placeholder="How can we assist you?"></textarea>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <input className={styles.input} placeholder="Email Address" />
+            <input className={styles.input} placeholder="Ministry / County / School" />
+          </div>
+
+          <select className={styles.input + " appearance-none cursor-pointer"}>
+            <option>General Assistance Inquiry</option>
+            <option>Membership & Certification</option>
+            <option>Statutory Compliance Inquiry</option>
+            <option>Operational Support Request</option>
+          </select>
+
+          <textarea className={styles.input} rows="4" placeholder="Briefly describe your request..."></textarea>
+
+          {/* URGENT TOGGLE */}
+          <div 
+            onClick={() => setIsUrgent(!isUrgent)}
+            className="flex items-center gap-4 p-4 bg-white/50 rounded-2xl border border-dashed border-gray-300 cursor-pointer hover:border-red-500 transition-all group"
+          >
+            <div className={`h-6 w-12 rounded-full relative transition-colors ${isUrgent ? 'bg-red-600' : 'bg-gray-300'}`}>
+              <div className={`h-4 w-4 bg-white rounded-full absolute top-1 transition-all ${isUrgent ? 'left-7' : 'left-1'}`}></div>
+            </div>
+            <span className={`text-[10px] font-black uppercase tracking-widest ${isUrgent ? 'text-red-600' : 'text-gray-500'}`}>
+              Flag as Urgent Operational Response
+            </span>
+          </div>
           
           <button 
             type="button" 
             onClick={handleTransmit}
             disabled={isTransmitting || isSent}
-            className={`w-full py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-xs transition-all shadow-xl ${
-              isSent ? "bg-green-600 text-white" : "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white"
+            className={`w-full py-7 rounded-2xl font-black uppercase tracking-[0.5em] text-xs transition-all shadow-xl ${
+              isSent ? "bg-green-600 text-white" : 
+              isUrgent ? "bg-red-600 text-white hover:bg-black" : 
+              "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white"
             }`}
           >
-            {isTransmitting ? "Sending..." : isSent ? "✓ Message Received" : "Send Official Message"}
+            {isTransmitting ? "TRANSMITTING..." : isSent ? "✓ INQUIRY LOGGED" : isUrgent ? "AUTHORIZE EMERGENCY SEND" : "SUBMIT OFFICIAL INQUIRY"}
           </button>
         </form>
       </div>
