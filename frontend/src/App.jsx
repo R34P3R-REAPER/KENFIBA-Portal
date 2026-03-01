@@ -224,85 +224,116 @@ function App() {
           </div>
         </div>
       </section>
-{/* 7. LIAISON COMMAND CENTER */}
+{/* 7. NATIONAL LIAISON & REGIONAL HUB */}
       <section id="contact" className="max-w-7xl mx-auto py-32 px-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
-          {/* LEFT: ACTIONABLE INTEL */}
-          <div className="lg:col-span-4 space-y-8">
+          {/* LEFT: COMMAND PROTOCOLS */}
+          <div className="lg:col-span-5 space-y-10">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span>
-                <span className="text-[10px] font-black text-[#006400] uppercase tracking-[0.4em]">Live Status: Active</span>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="h-2.5 w-2.5 bg-[#006400] rounded-full animate-pulse shadow-[0_0_10px_#006400]"></span>
+                <span className="text-[11px] font-black text-[#006400] uppercase tracking-[0.5em]">Command Status: Online</span>
               </div>
-              <h2 className="text-5xl font-black tracking-tighter uppercase mb-2">Liaison <br/><span className="text-[#006400]">Command.</span></h2>
-              <div className="h-1.5 w-20 bg-[#FFD700] mb-8"></div>
-              <p className="text-sm text-gray-500 font-medium leading-relaxed uppercase tracking-wider italic">
-                "Official Stakeholder Communication Channels for National Fire Coordination."
+              <h2 className="text-6xl font-black tracking-tighter uppercase mb-4 leading-none text-gray-900">
+                Regional <br/><span className="text-[#006400]">Liaison.</span>
+              </h2>
+              <div className="h-2 w-24 bg-[#FFD700] mb-8"></div>
+              <p className="text-sm text-gray-600 font-bold uppercase tracking-widest leading-relaxed">
+                Official coordination terminal for County Governments, State Agencies, and International Partners.
               </p>
             </div>
 
-            <div className="space-y-6">
-              {/* HQ Card */}
-              <div className="group flex gap-6 items-start p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all cursor-default">
-                <div className="h-12 w-12 bg-[#f0f7f0] text-[#006400] flex items-center justify-center rounded-xl text-xl shadow-inner group-hover:bg-[#006400] group-hover:text-white transition-colors">📍</div>
-                <div>
-                  <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-1">National Headquarters</h4>
-                  <p className="text-sm font-bold text-gray-800 leading-tight">Fire & Ambulance HQ,<br/>Tom Mboya Street, Nairobi.</p>
+            {/* EXPANDED INFO CARDS */}
+            <div className="grid grid-cols-1 gap-4">
+              {/* Primary HQ */}
+              <div className="group p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all border-l-8 border-l-[#006400]">
+                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">Secretariat Headquarters</h4>
+                <p className="text-lg font-black text-gray-800 tracking-tight leading-tight">
+                  Fire & Ambulance HQ,<br/>Tom Mboya Street, Nairobi.
+                </p>
+                <p className="mt-4 text-[10px] font-bold text-[#006400] uppercase tracking-widest group-hover:translate-x-2 transition-transform italic">→ Dispatch available 24/7</p>
+              </div>
+
+              {/* County Liaison Directory */}
+              <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-200">
+                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">County Liaison Framework</h4>
+                <div className="flex flex-wrap gap-2">
+                  {['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Uasin Gishu'].map((county) => (
+                    <span key={county} className="bg-white px-3 py-1 rounded-full text-[9px] font-black text-gray-500 border border-gray-100 uppercase tracking-tighter">
+                      {county} Sector
+                    </span>
+                  ))}
+                  <span className="bg-[#FFD700] px-3 py-1 rounded-full text-[9px] font-black text-black uppercase tracking-tighter">
+                    +42 Counties Active
+                  </span>
                 </div>
               </div>
 
-              {/* Hotline Card */}
-              <div className="group flex gap-6 items-start p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all cursor-default">
-                <div className="h-12 w-12 bg-[#fffcf0] text-[#b8860b] flex items-center justify-center rounded-xl text-xl shadow-inner group-hover:bg-[#FFD700] group-hover:text-[#006400] transition-colors">📞</div>
-                <div>
-                  <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-1">24/7 Command Hotline</h4>
-                  <p className="text-sm font-bold text-gray-800 leading-tight">+254 (020) 2371263<br/>+254 721 981 017</p>
-                </div>
-              </div>
-
-              {/* Email Card (The Elite CTA) */}
-              <div className="flex gap-6 items-start p-6 bg-[#006400] rounded-2xl shadow-xl transform hover:scale-[1.02] transition-all">
-                <div className="h-12 w-12 bg-white/10 text-[#FFD700] flex items-center justify-center rounded-xl text-xl">📧</div>
-                <div>
-                  <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-white/60 mb-1">Digital Registry</h4>
-                  <p className="text-sm font-bold text-white leading-tight underline underline-offset-4 decoration-[#FFD700]">kenfiba@yahoo.com<br/>registry@kenfiba.org</p>
-                </div>
+              {/* Digital Secure Line */}
+              <div className="p-8 bg-[#006400] rounded-[2rem] shadow-2xl text-white relative overflow-hidden group">
+                <div className="absolute -right-4 -top-4 text-white opacity-5 text-9xl font-black italic">@</div>
+                <h4 className="text-[10px] font-black text-[#FFD700] uppercase tracking-widest mb-3">Secure Communication Line</h4>
+                <p className="text-xl font-bold tracking-tighter mb-1">kenfiba@yahoo.com</p>
+                <p className="text-xl font-bold tracking-tighter opacity-80 underline decoration-[#FFD700] underline-offset-8">registry@kenfiba.org</p>
               </div>
             </div>
           </div>
 
-          {/* RIGHT: INTERACTIVE LIAISON TERMINAL */}
-          <div className="lg:col-span-8">
-            <div className="bg-white p-12 rounded-[3rem] shadow-2xl border border-gray-100 relative overflow-hidden">
-              {/* Background Design Element */}
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#006400] opacity-[0.03] rounded-full"></div>
-              
-              <div className="flex justify-between items-center mb-10">
-                <h3 className="text-3xl font-black uppercase tracking-tighter">Stakeholder <span className="italic font-serif text-gray-400">Handshake</span></h3>
-                <span className="text-[9px] font-black bg-gray-100 px-3 py-1 rounded-full text-gray-500 uppercase">Ref: Form-C/Liaison</span>
-              </div>
-              
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Officer Name & Rank</label>
-                  <input className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm" placeholder="EX: CHIEF OFFICER J. DOE" />
+          {/* RIGHT: THE LIAISON TERMINAL (FORM) */}
+          <div className="lg:col-span-7">
+            <div className="bg-white p-12 rounded-[4rem] shadow-2xl border border-gray-100 relative overflow-hidden">
+              <div className="relative z-10">
+                <div className="flex justify-between items-start mb-12">
+                  <div>
+                    <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900">Stakeholder <span className="text-gray-300">Terminal</span></h3>
+                    <p className="text-[10px] font-black text-[#006400] uppercase tracking-[0.3em] mt-1">Official Engagement Protocol</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="block text-[10px] font-black text-gray-300 uppercase tracking-widest">Document Ref:</span>
+                    <span className="block text-xs font-mono font-bold text-gray-900">KNF-LIAISON-2026</span>
+                  </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Ministry / County Authority</label>
-                  <input className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm" placeholder="EX: NAIROBI CITY COUNTY" />
-                </div>
-                <div className="md:col-span-2 space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Official Inquiry Details</label>
-                  <textarea className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm" rows="4" placeholder="DESCRIBE THE NATURE OF YOUR OFFICIAL LIAISON OR INQUIRY..."></textarea>
-                </div>
-                <div className="md:col-span-2">
-                  <button type="button" className="w-full bg-black text-[#FFD700] py-6 rounded-2xl font-black uppercase tracking-[0.4em] shadow-2xl hover:bg-[#006400] hover:text-white transition-all text-xs active:scale-95">
-                    Authorize & Transmit to Registry
+                
+                <form className="space-y-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Full Legal Name & Rank</label>
+                      <input className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" placeholder="e.g., CHIEF OFFICER JOHN DOE" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Ministry / County / Organization</label>
+                      <input className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" placeholder="e.g., MINISTRY OF INTERIOR" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Inquiry Classification</label>
+                    <select className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800 appearance-none">
+                      <option>Operational Support Request</option>
+                      <option>Statutory Compliance Inquiry</option>
+                      <option>Membership & Certification</option>
+                      <option>Media & Public Relations</option>
+                    </select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Correspondence Details</label>
+                    <textarea className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" rows="5" placeholder="Briefly state the nature of your liaison..."></textarea>
+                  </div>
+
+                  <button type="button" className="w-full bg-black text-[#FFD700] py-8 rounded-[2rem] font-black uppercase tracking-[0.5em] shadow-2xl hover:bg-[#006400] hover:text-white transition-all text-sm active:scale-95 flex items-center justify-center gap-4 group">
+                    <span>Submit to National Secretariat</span>
+                    <span className="group-hover:translate-x-2 transition-transform">→</span>
                   </button>
-                  <p className="text-center mt-6 text-[9px] font-bold text-gray-300 uppercase tracking-widest">Secure State-Liaison Encryption Enabled</p>
-                </div>
-              </form>
+                  
+                  <div className="flex justify-center items-center gap-4 pt-4">
+                    <div className="h-px w-8 bg-gray-200"></div>
+                    <p className="text-[9px] font-bold text-gray-300 uppercase tracking-widest italic">Identity Verification Required Upon Response</p>
+                    <div className="h-px w-8 bg-gray-200"></div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
 
