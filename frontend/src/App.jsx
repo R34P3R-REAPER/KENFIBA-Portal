@@ -141,17 +141,40 @@ function App() {
         </div>
       )}
 
-      {/* 7. PORTAL ERROR (SECURITY SIMULATION) */}
+     {/* 7. PORTAL ERROR (SECURITY SIMULATION) */}
       {showPortalError && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/80 backdrop-blur-xl">
-          <div className="bg-red-950 text-red-200 p-10 rounded-3xl max-w-md border border-red-500/30 text-center animate-in fade-in duration-200">
-            <div className="text-4xl mb-4 text-red-500">⚠️</div>
-            <h3 className="text-xl font-black uppercase mb-4">Registry Locked</h3>
-            <p className="text-sm leading-relaxed mb-8 opacity-80 font-medium">IP Address not whitelisted. Access to the National Fire Registry requires biometric or token-based authorization.</p>
-            <button onClick={() => setShowPortalError(false)} className="bg-red-500 text-white px-8 py-2 rounded-full font-black text-[10px] uppercase">Dismiss</button>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-2xl">
+          <div className="bg-[#1a0505] text-red-400 p-12 rounded-[2.5rem] max-w-lg border border-red-900/50 shadow-[0_0_50px_rgba(220,38,38,0.2)] text-center animate-in zoom-in duration-300">
+            
+            {/* Animated Shield/Warning Icon */}
+            <div className="relative w-24 h-24 mx-auto mb-8">
+              <div className="absolute inset-0 bg-red-600 opacity-20 animate-ping rounded-full"></div>
+              <div className="relative flex items-center justify-center w-full h-full bg-red-950 border-2 border-red-500 rounded-full text-4xl shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+                🔒
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 text-white">Registry Access Denied</h3>
+            
+            <div className="bg-black/40 p-6 rounded-2xl mb-8 border border-red-900/30">
+              <p className="text-[10px] font-mono uppercase tracking-widest text-red-500 mb-2">● Security Protocol: 0x99-SHIELD</p>
+              <p className="text-sm leading-relaxed opacity-90 font-medium font-serif">
+                Access from this terminal is not authorized. The National Fire Registry is restricted to **Ministry of Interior** whitelisted IPs and biometric-verified personnel only.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3">
+              <button 
+                onClick={() => setShowPortalError(false)} 
+                className="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.2em] transition-all"
+              >
+                Acknowledge Security Protocol
+              </button>
+              <p className="text-[9px] text-gray-500 uppercase tracking-widest">Incident logged: 2026-NFR-AUTH-ERR</p>
+            </div>
           </div>
         </div>
-        )}
+      )}
 
 
  {/* 8. STATUTORY VAULT */}
