@@ -31,8 +31,9 @@ function App() {
       setTimeout(() => setIsSent(false), 5000);
     }, 2000);
   };
-
+}
   return (
+  
     <div className="min-h-screen bg-[#FDFDFD] text-gray-900 font-sans selection:bg-[#FFD700]">
       
       {/* 1. SECURE TOP BAR */}
@@ -200,20 +201,106 @@ function App() {
         </div>
       )}
 
-      {/* 8. FOOTER */}
-      <footer className="bg-[#050505] text-white pt-32 pb-16 px-10 border-t-8 border-[#006400]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl font-black tracking-tighter uppercase mb-2 text-[#FFD700]">REPUBLIC OF KENYA</h2>
-            <p className="text-[10px] font-bold text-gray-500 tracking-[0.4em] uppercase">Official Asset of KENFIBA Liaison Office</p>
+     {/* 9. COMMAND CENTER FOOTER (STATE-GRADE) */}
+      <footer className="bg-[#050505] text-white pt-24 pb-12 px-10 border-t-8 border-[#006400]">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* TOP ROW: OFFICIAL PARTNERS & LOGOS */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 pb-16 border-b border-white/5 opacity-50 grayscale hover:grayscale-0 transition-all duration-700">
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-black">GoK</div>
+              <span className="text-[9px] font-black uppercase tracking-widest">Ministry of Interior</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-black">NDOC</div>
+              <span className="text-[9px] font-black uppercase tracking-widest">Disaster Operations</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-black">NPS</div>
+              <span className="text-[9px] font-black uppercase tracking-widest">Police Service</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 bg-white/10 rounded-full flex items-center justify-center text-[10px] font-black">KFS</div>
+              <span className="text-[9px] font-black uppercase tracking-widest">Fire Services</span>
+            </div>
           </div>
-          <div className="px-8 py-3 bg-white/5 rounded-full border border-white/10 text-[9px] font-black text-gray-400 uppercase tracking-widest">
-            Registration 21578 • © 2002-2026
+
+          {/* MIDDLE ROW: STRATEGIC SITEMAP */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 py-20">
+            
+            {/* Column 1: Identity */}
+            <div className="space-y-6">
+              <div className="flex items-center gap-3">
+                <div className="h-10 w-10 bg-[#006400] flex items-center justify-center text-white rounded font-black italic">K</div>
+                <h2 className="text-xl font-black tracking-tighter uppercase">KENFIBA</h2>
+              </div>
+              <p className="text-[11px] text-gray-500 font-bold leading-relaxed uppercase tracking-wider">
+                The National professional authority for fire and disaster mitigation coordination in the Republic of Kenya. 
+              </p>
+              <div className="pt-4">
+                <span className="px-4 py-2 bg-[#006400]/20 border border-[#006400]/50 rounded text-[#FFD700] text-[9px] font-black uppercase tracking-[0.3em]">
+                  Status: Gazetted Asset
+                </span>
+              </div>
+            </div>
+
+            {/* Column 2: Resources */}
+            <div>
+              <h4 className="text-[#FFD700] font-black text-[10px] uppercase tracking-[0.4em] mb-8">Statutory Links</h4>
+              <ul className="space-y-4 text-[11px] font-black text-gray-400 uppercase tracking-widest">
+                <li className="hover:text-white cursor-pointer transition-colors">National Fire Policy 2026</li>
+                <li className="hover:text-white cursor-pointer transition-colors">County Response Framework</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Institutional Membership</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Officer Code of Conduct</li>
+              </ul>
+            </div>
+
+            {/* Column 3: Administration */}
+            <div>
+              <h4 className="text-[#FFD700] font-black text-[10px] uppercase tracking-[0.4em] mb-8">Administration</h4>
+              <ul className="space-y-4 text-[11px] font-black text-gray-400 uppercase tracking-widest">
+                <li onClick={() => scrollTo('leadership')} className="hover:text-white cursor-pointer transition-colors">Executive Board</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Registry Verification</li>
+                <li className="hover:text-white cursor-pointer transition-colors">Press & Intelligence</li>
+                <li onClick={() => setShowPortalError(true)} className="hover:text-red-500 cursor-pointer transition-colors">Officer Portal</li>
+              </ul>
+            </div>
+
+            {/* Column 4: Reach */}
+            <div>
+              <h4 className="text-[#FFD700] font-black text-[10px] uppercase tracking-[0.4em] mb-8">Command HQ</h4>
+              <div className="space-y-4 text-[11px] font-black text-gray-500 uppercase tracking-widest">
+                <p className="text-white">Fire & Ambulance HQ</p>
+                <p>Tom Mboya Street, Nairobi</p>
+                <p className="pt-4 text-gray-400">P.O. BOX 42152-00100</p>
+                <p className="text-[#006400]">Nairobi, Kenya</p>
+              </div>
+            </div>
           </div>
+
+          {/* BOTTOM ROW: LEGAL & INTEGRITY */}
+          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em]">
+                © 2002-2026 Republic of Kenya
+              </div>
+              <div className="h-1 w-1 bg-gray-800 rounded-full hidden md:block"></div>
+              <div className="text-[10px] font-black text-gray-600 uppercase tracking-[0.4em]">
+                Societies Act Registration 21578
+              </div>
+            </div>
+            
+            <div className="flex gap-8 items-center">
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest hover:text-white cursor-pointer">Privacy Protocol</span>
+              <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest hover:text-white cursor-pointer">State Terms</span>
+              <div className="px-6 py-2 bg-white/5 rounded-full border border-white/10">
+                <p className="text-[9px] font-black text-[#FFD700] uppercase tracking-[0.3em] animate-pulse">National Integrity Verified</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </footer>
     </div>
   );
-}
-
 export default App;
