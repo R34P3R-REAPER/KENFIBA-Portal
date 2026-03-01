@@ -105,88 +105,102 @@ function App() {
         </div>
       </section>
 
-     {/* 5. NATIONAL COMMAND & LIAISON DIRECTORY */}
+     {/* 5. NATIONAL COMMAND DIRECTORY & SECURE TERMINAL */}
 <section id="contact" className="max-w-7xl mx-auto py-24 px-10">
   <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
     
-    {/* LEFT SIDE: THE DIRECTORY */}
+    {/* LEFT SIDE: COMMAND DIRECTORY */}
     <div className="lg:col-span-5 space-y-12">
       <div>
-        <h2 className="text-5xl font-black tracking-tighter uppercase mb-4">Official <span className="text-[#006400]">Channels.</span></h2>
-        <p className="text-[10px] font-black text-gray-400 uppercase tracking-[0.4em] mb-10">Departmental Communication Registry</p>
+        <h2 className="text-5xl font-black tracking-tighter uppercase mb-4 leading-none">
+          Contact <br /><span className="text-[#006400]">The Registry.</span>
+        </h2>
+        <div className="h-1.5 w-20 bg-[#FFD700] mb-6"></div>
+        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Operational Support & Liaison</p>
       </div>
 
-      <div className="space-y-8">
-        {/* Email Block */}
+      <div className="space-y-10">
+        {/* Email Authority Block */}
         <div className="group">
-          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-[#006400] rounded-full"></span> 
-            Secure Electronic Correspondence
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
+            <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span> 
+            Official Correspondence
           </h4>
-          <div className="space-y-2">
-            <p className="text-2xl font-black tracking-tighter text-gray-900 group-hover:text-[#006400] transition-colors cursor-pointer">registry@kenfiba.org</p>
-            <p className="text-xl font-bold tracking-tighter text-gray-400">kenfiba@yahoo.com</p>
+          <div className="space-y-3">
+            <div className="flex flex-col">
+              <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter italic">Primary Registry</span>
+              <a href="mailto:registry@kenfiba.org" className="text-2xl font-black tracking-tighter text-gray-900 hover:text-[#006400] transition-colors">
+                registry@kenfiba.org
+              </a>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter italic">Legacy Archive</span>
+              <a href="mailto:kenfiba@yahoo.com" className="text-xl font-bold tracking-tighter text-gray-500 hover:text-black transition-colors">
+                kenfiba@yahoo.com
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Telephone Block */}
+        {/* Telephone Command Block */}
         <div className="group">
-          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-[#006400] rounded-full"></span> 
+          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
+            <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span> 
             Direct Command Lines
           </h4>
-          <div className="space-y-2">
-            <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 722 756 544</p>
-            <p className="text-xl font-bold tracking-tighter text-gray-400">+254 (0) 733 841 424</p>
+          <div className="grid grid-cols-1 gap-4">
+            <div>
+              <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 722 756 544</p>
+              <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">National Secretariat</span>
+            </div>
+            <div>
+              <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 733 841 424</p>
+              <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Liaison Officer</span>
+            </div>
           </div>
-        </div>
-
-        {/* Physical HQ Block */}
-        <div className="group">
-          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-3 flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-[#006400] rounded-full"></span> 
-            Physical Headquarters
-          </h4>
-          <p className="text-lg font-bold tracking-tight text-gray-700 leading-tight">
-            Nairobi City County Fire & Ambulance HQ,<br />
-            Tom Mboya Street, Nairobi, Kenya
-          </p>
         </div>
       </div>
     </div>
 
-    {/* RIGHT SIDE: THE ACTION TERMINAL */}
+    {/* RIGHT SIDE: SECURE SUBMISSION TERMINAL */}
     <div className="lg:col-span-7">
-      <div className="bg-black p-12 rounded-[3rem] shadow-3xl relative overflow-hidden">
-        {/* Decorative Grid Pattern */}
-        <div className="absolute inset-0 opacity-10 pointer-events-none" 
-             style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+      <div className="bg-[#0A0A0A] p-12 rounded-[3.5rem] shadow-3xl border border-white/5 relative overflow-hidden group">
+        <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+          <div className="h-24 w-24 bg-[#006400] rounded-full blur-3xl"></div>
+        </div>
         
         <div className="relative z-10">
-          <div className="flex justify-between items-start mb-10">
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-white">Liaison <span className="text-[#FFD700]">Terminal</span></h3>
-            <div className="px-4 py-1 border border-[#FFD700]/30 rounded-full">
-              <span className="text-[8px] font-black text-[#FFD700] uppercase tracking-widest animate-pulse">Encryption: AES-256</span>
+          <div className="flex justify-between items-center mb-10">
+            <h3 className="text-3xl font-black uppercase tracking-tighter text-white leading-none">
+              Stakeholder <br /><span className="text-[#FFD700]">Terminal</span>
+            </h3>
+            <div className="text-right">
+              <div className="text-[8px] font-black text-green-500 uppercase tracking-widest mb-1 flex items-center justify-end gap-2">
+                <span className="h-1 w-1 bg-green-500 rounded-full"></span> SSL Secure
+              </div>
+              <div className="text-[10px] font-mono text-gray-500 uppercase">SYS-LOG: {new Date().getFullYear()}</div>
             </div>
           </div>
 
           <form className="space-y-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <input className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" placeholder="Officer Name / Rank" />
-              <input className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" placeholder="Mobile Number" />
+              <input className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" placeholder="Officer Name / Rank" />
+              <input className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" placeholder="Direct Contact Number" />
             </div>
-            <input className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" placeholder="Organization / County Government" />
-            <textarea className="w-full p-4 bg-white/5 border border-white/10 rounded-xl text-white font-bold text-sm focus:border-[#FFD700] outline-none transition-all placeholder:text-gray-600" rows="4" placeholder="Nature of statutory inquiry..."></textarea>
+            <input className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" placeholder="Organization (Ministry/County/State)" />
+            <textarea className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" rows="4" placeholder="Briefly state the nature of your liaison..."></textarea>
             
             <button 
               type="button" 
               onClick={handleTransmit}
               disabled={isTransmitting || isSent}
-              className={`w-full py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-xs transition-all shadow-2xl ${
+              className={`w-full py-7 rounded-2xl font-black uppercase tracking-[0.5em] text-xs transition-all shadow-2xl relative overflow-hidden ${
                 isSent ? "bg-green-600 text-white" : "bg-[#FFD700] text-black hover:bg-white active:scale-[0.98]"
               }`}
             >
-              {isTransmitting ? "Verifying Credentials..." : isSent ? "✓ Message Logged" : "Submit to Registry"}
+              <span className="relative z-10">
+                {isTransmitting ? "Encrypting & Logging..." : isSent ? "✓ Transmission Complete" : "Authorize & Transmit"}
+              </span>
             </button>
           </form>
         </div>
