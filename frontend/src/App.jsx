@@ -10,6 +10,7 @@ const styles = {
 };
 function App() {
   // --- ALL HOOKS MUST BE INSIDE HERE ---
+  const [view, setView] = useState('portal'); // 'portal' or 'gallery'
   const [isUrgent, setIsUrgent] = useState(false);
   const [showPortalError, setShowPortalError] = useState(false);
   const [isTransmitting, setIsTransmitting] = useState(false);
@@ -86,7 +87,88 @@ function App() {
           </div>
         </div>
       </header>
+{/* 4. OPERATIONS BENTO GRID */}
+<section className="max-w-7xl mx-auto py-24 px-10">
+  <div className="flex justify-between items-end mb-16">
+    <div className="space-y-4">
+      <h2 className="text-6xl font-black tracking-tighter uppercase leading-[0.8] text-gray-900">
+        National <br /><span className="text-[#006400]">Operations.</span>
+      </h2>
+      <div className="h-1.5 w-24 bg-[#FFD700]"></div>
+    </div>
+    <button 
+      onClick={() => setView('gallery')}
+      className="px-8 py-4 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full hover:bg-[#006400] transition-all active:scale-95 shadow-xl"
+    >
+      Open Full Archive
+    </button>
+  </div>
 
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-[800px]">
+    {/* LARGE FEATURE: Training & Drills */}
+    <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-[3rem] bg-gray-100 border border-gray-200 shadow-2xl">
+      <img src="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?q=80&w=1600" className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Drills" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-10 flex flex-col justify-end">
+        <span className="text-[#FFD700] text-[10px] font-black uppercase tracking-widest mb-2">Tactical Command</span>
+        <h4 className="text-white text-3xl font-black uppercase tracking-tighter">Strategic Response Training</h4>
+      </div>
+    </div>
+
+    {/* SMALL: Fleet Management */}
+    <div className="relative group overflow-hidden rounded-[3rem] bg-gray-100 border border-gray-200">
+      <img src="https://images.unsplash.com/photo-1582268611958-ebaf16150267?q=80&w=800" className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" alt="Fleet" />
+      <div className="absolute top-6 left-6 h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white font-black">01</div>
+    </div>
+
+    {/* SMALL: Community Impact */}
+    <div className="relative group overflow-hidden rounded-[3rem] bg-gray-100 border border-gray-200">
+      <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800" className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Community" />
+    </div>
+
+    {/* WIDE: Equipment Logistics */}
+    <div className="md:col-span-2 relative group overflow-hidden rounded-[3rem] bg-black border border-white/10 shadow-3xl">
+      <img src="https://images.unsplash.com/photo-1502740479091-635887520276?q=80&w=1200" className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all duration-1000" alt="Logistics" />
+      <div className="absolute inset-0 flex items-center justify-center text-center p-10">
+        <h4 className="text-white text-4xl font-black uppercase tracking-widest italic scale-y-125">Equipment Standards</h4>
+      </div>
+    </div>
+  </div>
+</section>
+{/* THE FULL GALLERY OVERLAY/SUBPAGE */}
+{view === 'gallery' && (
+  <div className="fixed inset-0 z-[100] bg-white overflow-y-auto p-10 animate-in fade-in slide-in-from-bottom-10 duration-500">
+    <div className="max-w-7xl mx-auto">
+      {/* HEADER */}
+      <div className="flex justify-between items-center mb-20">
+        <h1 className="text-8xl font-black tracking-tighter uppercase text-gray-900 leading-none">
+          National <br /><span className="text-[#006400]">Archives.</span>
+        </h1>
+        <button 
+          onClick={() => setView('portal')}
+          className="h-20 w-20 bg-gray-100 rounded-full flex items-center justify-center font-black uppercase text-[10px] hover:bg-black hover:text-[#FFD700] transition-all"
+        >
+          Close
+        </button>
+      </div>
+
+      {/* MASONRY GRID (20+ PICTURES) */}
+      <div className="columns-1 md:columns-3 lg:columns-4 gap-6 space-y-6">
+        {[1,2,3,4,5,6,7,8,9,10,11,12].map((i) => (
+          <div key={i} className="relative group overflow-hidden rounded-[2.5rem] bg-gray-50 border border-gray-100 break-inside-avoid">
+            <img 
+              src={`https://picsum.photos/seed/${i + 50}/800/${i % 2 === 0 ? '1200' : '800'}`} 
+              className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" 
+              alt="Archive"
+            />
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity p-6 flex items-end">
+              <span className="text-white text-[9px] font-black uppercase tracking-widest">Case Log: {2020 + i}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
       {/* 4. LEADERSHIP SECTION */}
       <section id="leadership" className="py-32 px-10 max-w-7xl mx-auto">
         <h2 className={styles.sectionTitle}>National <span className="text-[#006400]">Leadership</span></h2>
