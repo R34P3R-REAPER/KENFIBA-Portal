@@ -75,4 +75,4 @@ app.get('/api/inquiries', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => console.log(`🚀 KENFIBA PORTAL ACTIVE ON PORT ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 KENFIBA PORTAL ACTIVE ON PORT ${PORT}`));// Force Redeploy 2026
