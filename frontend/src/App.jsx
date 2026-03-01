@@ -224,7 +224,90 @@ function App() {
           </div>
         </div>
       </section>
+{/* 7. LIAISON COMMAND CENTER */}
+      <section id="contact" className="max-w-7xl mx-auto py-32 px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* LEFT: ACTIONABLE INTEL */}
+          <div className="lg:col-span-4 space-y-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span>
+                <span className="text-[10px] font-black text-[#006400] uppercase tracking-[0.4em]">Live Status: Active</span>
+              </div>
+              <h2 className="text-5xl font-black tracking-tighter uppercase mb-2">Liaison <br/><span className="text-[#006400]">Command.</span></h2>
+              <div className="h-1.5 w-20 bg-[#FFD700] mb-8"></div>
+              <p className="text-sm text-gray-500 font-medium leading-relaxed uppercase tracking-wider italic">
+                "Official Stakeholder Communication Channels for National Fire Coordination."
+              </p>
+            </div>
 
+            <div className="space-y-6">
+              {/* HQ Card */}
+              <div className="group flex gap-6 items-start p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all cursor-default">
+                <div className="h-12 w-12 bg-[#f0f7f0] text-[#006400] flex items-center justify-center rounded-xl text-xl shadow-inner group-hover:bg-[#006400] group-hover:text-white transition-colors">📍</div>
+                <div>
+                  <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-1">National Headquarters</h4>
+                  <p className="text-sm font-bold text-gray-800 leading-tight">Fire & Ambulance HQ,<br/>Tom Mboya Street, Nairobi.</p>
+                </div>
+              </div>
+
+              {/* Hotline Card */}
+              <div className="group flex gap-6 items-start p-6 bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-all cursor-default">
+                <div className="h-12 w-12 bg-[#fffcf0] text-[#b8860b] flex items-center justify-center rounded-xl text-xl shadow-inner group-hover:bg-[#FFD700] group-hover:text-[#006400] transition-colors">📞</div>
+                <div>
+                  <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-gray-400 mb-1">24/7 Command Hotline</h4>
+                  <p className="text-sm font-bold text-gray-800 leading-tight">+254 (020) 2371263<br/>+254 721 981 017</p>
+                </div>
+              </div>
+
+              {/* Email Card (The Elite CTA) */}
+              <div className="flex gap-6 items-start p-6 bg-[#006400] rounded-2xl shadow-xl transform hover:scale-[1.02] transition-all">
+                <div className="h-12 w-12 bg-white/10 text-[#FFD700] flex items-center justify-center rounded-xl text-xl">📧</div>
+                <div>
+                  <h4 className="font-black text-[10px] uppercase tracking-[0.2em] text-white/60 mb-1">Digital Registry</h4>
+                  <p className="text-sm font-bold text-white leading-tight underline underline-offset-4 decoration-[#FFD700]">kenfiba@yahoo.com<br/>registry@kenfiba.org</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: INTERACTIVE LIAISON TERMINAL */}
+          <div className="lg:col-span-8">
+            <div className="bg-white p-12 rounded-[3rem] shadow-2xl border border-gray-100 relative overflow-hidden">
+              {/* Background Design Element */}
+              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#006400] opacity-[0.03] rounded-full"></div>
+              
+              <div className="flex justify-between items-center mb-10">
+                <h3 className="text-3xl font-black uppercase tracking-tighter">Stakeholder <span className="italic font-serif text-gray-400">Handshake</span></h3>
+                <span className="text-[9px] font-black bg-gray-100 px-3 py-1 rounded-full text-gray-500 uppercase">Ref: Form-C/Liaison</span>
+              </div>
+              
+              <form className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Officer Name & Rank</label>
+                  <input className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm" placeholder="EX: CHIEF OFFICER J. DOE" />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Ministry / County Authority</label>
+                  <input className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm" placeholder="EX: NAIROBI CITY COUNTY" />
+                </div>
+                <div className="md:col-span-2 space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-2">Official Inquiry Details</label>
+                  <textarea className="w-full p-5 bg-gray-50 rounded-2xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm" rows="4" placeholder="DESCRIBE THE NATURE OF YOUR OFFICIAL LIAISON OR INQUIRY..."></textarea>
+                </div>
+                <div className="md:col-span-2">
+                  <button type="button" className="w-full bg-black text-[#FFD700] py-6 rounded-2xl font-black uppercase tracking-[0.4em] shadow-2xl hover:bg-[#006400] hover:text-white transition-all text-xs active:scale-95">
+                    Authorize & Transmit to Registry
+                  </button>
+                  <p className="text-center mt-6 text-[9px] font-bold text-gray-300 uppercase tracking-widest">Secure State-Liaison Encryption Enabled</p>
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </section>
       {/* 9. EXECUTIVE FOOTER */}
       <footer className="bg-[#050505] text-white pt-32 pb-16 px-10">
         <div className="max-w-7xl mx-auto">
