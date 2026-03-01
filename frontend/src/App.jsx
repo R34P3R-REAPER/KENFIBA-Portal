@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-const [isTransmitting, setIsTransmitting] = useState(false);
-const [isSent, setIsSent] = useState(false);
 
 // --- ELITE THEME CONFIG ---
 const styles = {
@@ -12,23 +10,28 @@ const styles = {
 };
 
 function App() {
+  // --- ALL HOOKS MUST BE INSIDE HERE ---
   const [showContact, setShowContact] = useState(false);
   const [showPortalError, setShowPortalError] = useState(false);
+  const [isTransmitting, setIsTransmitting] = useState(false);
+  const [isSent, setIsSent] = useState(false);
 
   const scrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
-const handleTransmit = () => {
-  setIsTransmitting(true);
-  // Simulate a secure government server delay
-  setTimeout(() => {
-    setIsTransmitting(false);
-    setIsSent(true);
-    // Reset after 5 seconds
-    setTimeout(() => setIsSent(false), 5000);
-  }, 2000);
-};
+
+  const handleTransmit = () => {
+    setIsTransmitting(true);
+    // Simulate secure government server delay
+    setTimeout(() => {
+      setIsTransmitting(false);
+      setIsSent(true);
+      // Reset after 5 seconds
+      setTimeout(() => setIsSent(false), 5000);
+    }, 2000);
+  };
+
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-gray-900 font-sans selection:bg-[#FFD700]">
       
@@ -55,7 +58,7 @@ const handleTransmit = () => {
           <span onClick={() => scrollTo('leadership')} className={styles.navLink}>Leadership</span>
           <span onClick={() => scrollTo('media')} className={styles.navLink}>Intelligence</span>
           <span onClick={() => scrollTo('vault')} className={styles.navLink}>Statutes</span>
-          <button onClick={() => setShowContact(true)} className="text-[10px] font-black uppercase tracking-widest bg-gray-100 px-6 py-2 rounded-full hover:bg-[#FFD700] transition-all">Quick Contact</button>
+          <span onClick={() => scrollTo('contact')} className={styles.navLink}>Liaison</span>
           <button onClick={() => setShowPortalError(true)} className={styles.btnPrimary}>Portal Login</button>
         </div>
       </nav>
@@ -68,7 +71,6 @@ const handleTransmit = () => {
           alt="Hero"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
-        
         <div className="relative z-10 max-w-4xl">
           <div className="flex items-center gap-3 mb-6">
             <div className="h-px w-12 bg-[#FFD700]"></div>
@@ -82,7 +84,7 @@ const handleTransmit = () => {
           </p>
           <div className="flex gap-4">
             <button onClick={() => scrollTo('vault')} className={styles.btnPrimary}>Download Charters</button>
-            <button onClick={() => setShowContact(true)} className="px-8 py-3 rounded-full border-2 border-white/20 text-white font-black text-[11px] uppercase tracking-widest hover:bg-white hover:text-black transition-all">Submit Inquiries</button>
+            <button onClick={() => scrollTo('contact')} className="px-8 py-3 rounded-full border-2 border-white/20 text-white font-black text-[11px] uppercase tracking-widest hover:bg-white hover:text-black transition-all">Submit Inquiries</button>
           </div>
         </div>
       </header>
@@ -106,140 +108,9 @@ const handleTransmit = () => {
         </div>
       </section>
 
-      {/* 5. MEDIA & INTELLIGENCE */}
-      <section id="media" className="bg-[#050505] py-32 px-10 text-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-5xl font-black mb-16 tracking-tighter uppercase">Operational <span className="text-[#FFD700]">Intelligence</span></h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group relative h-[450px] overflow-hidden rounded-3xl">
-              <img src="https://images.unsplash.com/photo-1599700403969-f77b3ca7480d?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black p-10 flex flex-col justify-end">
-                <h4 className="text-2xl font-black uppercase tracking-tighter">Response Apparatus</h4>
-              </div>
-            </div>
-            <div className="group relative h-[450px] overflow-hidden rounded-3xl md:mt-12">
-              <img src="https://images.unsplash.com/photo-1534073828943-f801091bb240?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black p-10 flex flex-col justify-end">
-                <h4 className="text-2xl font-black uppercase tracking-tighter">Disaster Coordination</h4>
-              </div>
-            </div>
-            <div className="group relative h-[450px] overflow-hidden rounded-3xl">
-              <img src="https://images.unsplash.com/photo-1463171359979-330b66a35898?auto=format&fit=crop&q=80&w=800" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 group-hover:opacity-100" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black p-10 flex flex-col justify-end">
-                <h4 className="text-2xl font-black uppercase tracking-tighter">Officer Training</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. POP-UP MODAL (CONTACT) */}
-      {showContact && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-sm">
-          <div className="bg-white w-full max-w-2xl rounded-[2rem] shadow-2xl overflow-hidden relative animate-in zoom-in duration-200">
-            <button onClick={() => setShowContact(false)} className="absolute top-6 right-8 font-black text-xl hover:text-red-600 transition-colors">✕</button>
-            <div className="p-12">
-              <h3 className="text-3xl font-black uppercase tracking-tighter mb-2">Registry Liaison</h3>
-              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-8">Official Inquiry Terminal</p>
-              <form className="space-y-4">
-                <input className={styles.input} placeholder="Officer Name & Rank" />
-                <input className={styles.input} placeholder="Authority / Department" />
-                <textarea className={styles.input} rows="4" placeholder="Brief Summary of Inquiry..."></textarea>
-                <button type="button" className="w-full bg-[#006400] text-white py-5 rounded-xl font-black uppercase tracking-widest">Seal & Submit</button>
-              </form>
-            </div>
-          </div>
-        </div>
-      )}
-
-     {/* 7. PORTAL ERROR (SECURITY SIMULATION) */}
-      {showPortalError && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-2xl">
-          <div className="bg-[#1a0505] text-red-400 p-12 rounded-[2.5rem] max-w-lg border border-red-900/50 shadow-[0_0_50px_rgba(220,38,38,0.2)] text-center animate-in zoom-in duration-300">
-            
-            {/* Animated Shield/Warning Icon */}
-            <div className="relative w-24 h-24 mx-auto mb-8">
-              <div className="absolute inset-0 bg-red-600 opacity-20 animate-ping rounded-full"></div>
-              <div className="relative flex items-center justify-center w-full h-full bg-red-950 border-2 border-red-500 rounded-full text-4xl shadow-[0_0_20px_rgba(239,68,68,0.5)]">
-                🔒
-              </div>
-            </div>
-
-            <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 text-white">Registry Access Denied</h3>
-            
-            <div className="bg-black/40 p-6 rounded-2xl mb-8 border border-red-900/30">
-              <p className="text-[10px] font-mono uppercase tracking-widest text-red-500 mb-2">● Security Protocol: 0x99-SHIELD</p>
-              <p className="text-sm leading-relaxed opacity-90 font-medium font-serif">
-                Access from this terminal is not authorized. The National Fire Registry is restricted to **Ministry of Interior** whitelisted IPs and biometric-verified personnel only.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-3">
-              <button 
-                onClick={() => setShowPortalError(false)} 
-                className="w-full bg-red-600 hover:bg-red-700 text-white py-4 rounded-xl font-black text-[11px] uppercase tracking-[0.2em] transition-all"
-              >
-                Acknowledge Security Protocol
-              </button>
-              <p className="text-[9px] text-gray-500 uppercase tracking-widest">Incident logged: 2026-NFR-AUTH-ERR</p>
-            </div>
-          </div>
-        </div>
-      )}
-
-
- {/* 8. STATUTORY VAULT */}
-      <section id="vault" className="py-32 px-10 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-          <div>
-            <h2 className={styles.sectionTitle}>Statutory <span className="text-[#006400]">Vault</span></h2>
-            <p className="text-xs font-bold text-gray-400 uppercase tracking-[0.3em]">Legal Framework & Registration Credentials</p>
-          </div>
-          <div className="hidden md:block h-px flex-1 bg-gray-100 mx-10 mb-6"></div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Certificate Card */}
-          <div className="group p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:border-[#006400] transition-all duration-500 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-              <div className="text-8xl font-black italic">01</div>
-            </div>
-            <div className="relative z-10">
-              <div className="w-12 h-12 bg-[#f0f7f0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#006400] transition-colors">
-                <span className="text-[#006400] group-hover:text-[#FFD700] font-bold">PDF</span>
-              </div>
-              <h4 className="font-black text-2xl uppercase tracking-tighter mb-2">Registration Certificate</h4>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Official Societies Registry • No. 21578</p>
-              {/* Ensure you place 'certificate.pdf' in your public folder */}
-              <a href="/docs/certificate.pdf" download className="inline-block bg-[#006400] text-[#FFD700] px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-lg hover:bg-black transition-all">
-                Download Credential
-              </a>
-            </div>
-          </div>
-
-          {/* Charter Card */}
-          <div className="group p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:border-[#006400] transition-all duration-500 relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-              <div className="text-8xl font-black italic">02</div>
-            </div>
-            <div className="relative z-10">
-              <div className="w-12 h-12 bg-[#f0f7f0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#006400] transition-colors">
-                <span className="text-[#006400] group-hover:text-[#FFD700] font-bold">DOC</span>
-              </div>
-              <h4 className="font-black text-2xl uppercase tracking-tighter mb-2">KENFIBA Charter</h4>
-              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Constitution & Operational Mandate</p>
-              <a href="/docs/charter.pdf" download className="inline-block bg-[#006400] text-[#FFD700] px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-lg hover:bg-black transition-all">
-                Download Charter
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-{/* 7. NATIONAL LIAISON & REGIONAL HUB */}
-      <section id="contact" className="max-w-7xl mx-auto py-32 px-10">
+      {/* 5. NATIONAL LIAISON & REGIONAL HUB */}
+      <section id="contact" className="max-w-7xl mx-auto py-32 px-10 bg-gray-50/50 rounded-[4rem] my-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-          
-          {/* LEFT: COMMAND PROTOCOLS */}
           <div className="lg:col-span-5 space-y-10">
             <div>
               <div className="flex items-center gap-3 mb-4">
@@ -254,158 +125,90 @@ const handleTransmit = () => {
                 Official coordination terminal for County Governments, State Agencies, and International Partners.
               </p>
             </div>
-
-            {/* EXPANDED INFO CARDS */}
-            <div className="grid grid-cols-1 gap-4">
-              {/* Primary HQ */}
-              <div className="group p-8 bg-white rounded-[2rem] border border-gray-100 shadow-sm hover:shadow-xl transition-all border-l-8 border-l-[#006400]">
-                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3">Secretariat Headquarters</h4>
-                <p className="text-lg font-black text-gray-800 tracking-tight leading-tight">
-                  Fire & Ambulance HQ,<br/>Tom Mboya Street, Nairobi.
-                </p>
-                <p className="mt-4 text-[10px] font-bold text-[#006400] uppercase tracking-widest group-hover:translate-x-2 transition-transform italic">→ Dispatch available 24/7</p>
-              </div>
-
-              {/* County Liaison Directory */}
-              <div className="p-8 bg-gray-50 rounded-[2rem] border border-gray-200">
-                <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">County Liaison Framework</h4>
-                <div className="flex flex-wrap gap-2">
-                  {['Nairobi', 'Mombasa', 'Kisumu', 'Nakuru', 'Uasin Gishu'].map((county) => (
-                    <span key={county} className="bg-white px-3 py-1 rounded-full text-[9px] font-black text-gray-500 border border-gray-100 uppercase tracking-tighter">
-                      {county} Sector
-                    </span>
-                  ))}
-                  <span className="bg-[#FFD700] px-3 py-1 rounded-full text-[9px] font-black text-black uppercase tracking-tighter">
-                    +42 Counties Active
-                  </span>
-                </div>
-              </div>
-
-              {/* Digital Secure Line */}
-              <div className="p-8 bg-[#006400] rounded-[2rem] shadow-2xl text-white relative overflow-hidden group">
-                <div className="absolute -right-4 -top-4 text-white opacity-5 text-9xl font-black italic">@</div>
-                <h4 className="text-[10px] font-black text-[#FFD700] uppercase tracking-widest mb-3">Secure Communication Line</h4>
-                <p className="text-xl font-bold tracking-tighter mb-1">kenfiba@yahoo.com</p>
-                <p className="text-xl font-bold tracking-tighter opacity-80 underline decoration-[#FFD700] underline-offset-8">registry@kenfiba.org</p>
-              </div>
+            <div className="p-8 bg-[#006400] rounded-[2rem] shadow-2xl text-white relative overflow-hidden group">
+              <div className="absolute -right-4 -top-4 text-white opacity-5 text-9xl font-black italic">@</div>
+              <h4 className="text-[10px] font-black text-[#FFD700] uppercase tracking-widest mb-3">Secure Communication Line</h4>
+              <p className="text-xl font-bold tracking-tighter mb-1">kenfiba@yahoo.com</p>
+              <p className="text-xl font-bold tracking-tighter opacity-80 underline decoration-[#FFD700] underline-offset-8">registry@kenfiba.org</p>
             </div>
           </div>
 
-          {/* RIGHT: THE LIAISON TERMINAL (FORM) */}
           <div className="lg:col-span-7">
-            <div className="bg-white p-12 rounded-[4rem] shadow-2xl border border-gray-100 relative overflow-hidden">
+            <div className="bg-white p-12 rounded-[3rem] shadow-2xl border border-gray-100 relative overflow-hidden">
               <div className="relative z-10">
-                <div className="flex justify-between items-start mb-12">
-                  <div>
-                    <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900">Stakeholder <span className="text-gray-300">Terminal</span></h3>
-                    <p className="text-[10px] font-black text-[#006400] uppercase tracking-[0.3em] mt-1">Official Engagement Protocol</p>
+                <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900 mb-8">Stakeholder <span className="text-gray-300">Terminal</span></h3>
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <input className={styles.input} placeholder="Officer Name & Rank" />
+                    <input className={styles.input} placeholder="Ministry / County" />
                   </div>
-                  <div className="text-right">
-                    <span className="block text-[10px] font-black text-gray-300 uppercase tracking-widest">Document Ref:</span>
-                    <span className="block text-xs font-mono font-bold text-gray-900">KNF-LIAISON-2026</span>
-                  </div>
-                </div>
-                
-                <form className="space-y-8">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Full Legal Name & Rank</label>
-                      <input className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" placeholder="e.g., CHIEF OFFICER JOHN DOE" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Ministry / County / Organization</label>
-                      <input className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" placeholder="e.g., MINISTRY OF INTERIOR" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Inquiry Classification</label>
-                    <select className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800 appearance-none">
-                      <option>Operational Support Request</option>
-                      <option>Statutory Compliance Inquiry</option>
-                      <option>Membership & Certification</option>
-                      <option>Media & Public Relations</option>
-                    </select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-gray-400 ml-4">Correspondence Details</label>
-                    <textarea className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" rows="5" placeholder="Briefly state the nature of your liaison..."></textarea>
-                  </div>
-
-                 <button 
-  type="button" 
-  onClick={handleTransmit}
-  disabled={isTransmitting || isSent}
-  className={`w-full py-8 rounded-[2rem] font-black uppercase tracking-[0.5em] shadow-2xl transition-all text-sm flex items-center justify-center gap-4 ${
-    isSent 
-    ? "bg-green-600 text-white cursor-default" 
-    : "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white active:scale-95"
-  }`}
->
-  {isTransmitting ? (
-    <span className="flex items-center gap-3">
-      <span className="h-4 w-4 border-2 border-[#FFD700] border-t-transparent rounded-full animate-spin"></span>
-      Encrypting & Transmitting...
-    </span>
-  ) : isSent ? (
-    <span className="flex items-center gap-3">
-      ✓ Submission Logged to National Registry
-    </span>
-  ) : (
-    <>
-      <span>Authorize & Transmit to Registry</span>
-      <span className="group-hover:translate-x-2 transition-transform">→</span>
-    </>
-  )}
-</button>
-                  
-                  <div className="flex justify-center items-center gap-4 pt-4">
-                    <div className="h-px w-8 bg-gray-200"></div>
-                    <p className="text-[9px] font-bold text-gray-300 uppercase tracking-widest italic">Identity Verification Required Upon Response</p>
-                    <div className="h-px w-8 bg-gray-200"></div>
-                  </div>
+                  <select className={styles.input + " appearance-none"}>
+                    <option>Operational Support Request</option>
+                    <option>Statutory Compliance Inquiry</option>
+                    <option>Membership & Certification</option>
+                  </select>
+                  <textarea className={styles.input} rows="4" placeholder="Briefly state the nature of your liaison..."></textarea>
+                  <button 
+                    type="button" 
+                    onClick={handleTransmit}
+                    disabled={isTransmitting || isSent}
+                    className={`w-full py-7 rounded-2xl font-black uppercase tracking-[0.5em] shadow-2xl transition-all text-xs flex items-center justify-center gap-4 ${
+                      isSent ? "bg-green-600 text-white cursor-default" : "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white"
+                    }`}
+                  >
+                    {isTransmitting ? "Encrypting & Transmitting..." : isSent ? "✓ Submission Logged" : "Authorize & Transmit"}
+                  </button>
                 </form>
               </div>
             </div>
           </div>
-
         </div>
       </section>
-      {/* 9. EXECUTIVE FOOTER */}
-      <footer className="bg-[#050505] text-white pt-32 pb-16 px-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-20 mb-20">
-            <div className="col-span-1 md:col-span-1">
-              <div className="flex items-center gap-4 mb-8">
-                <div className="h-10 w-10 bg-[#006400] flex items-center justify-center text-white rounded-lg font-black italic">K</div>
-                <h2 className="text-xl font-black tracking-tighter uppercase">KENFIBA</h2>
-              </div>
-              <p className="text-sm text-gray-500 font-medium leading-relaxed">
-                The definitive professional authority for fire services and disaster mitigation in the Republic of Kenya.
-              </p>
-            </div>
-            <div>
-              <h4 className="text-[#FFD700] font-black text-[10px] uppercase tracking-[0.3em] mb-8">Command Center</h4>
-              <p className="text-sm text-gray-400 mb-2 font-bold uppercase">Nairobi Headquarters</p>
-              <p className="text-sm text-gray-500">Fire & Ambulance HQ, Tom Mboya Street</p>
-            </div>
-            <div>
-              <h4 className="text-[#FFD700] font-black text-[10px] uppercase tracking-[0.3em] mb-8">Legal Registry</h4>
-              <p className="text-sm text-gray-400 mb-2 font-bold uppercase">Societies Act Cap 108</p>
-              <p className="text-sm text-gray-500">Registered July 15th, 2002</p>
+
+      {/* 6. STATUTORY VAULT */}
+      <section id="vault" className="py-32 px-10 max-w-7xl mx-auto">
+        <h2 className={styles.sectionTitle}>Statutory <span className="text-[#006400]">Vault</span></h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+          <div className="group p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:border-[#006400] transition-all relative overflow-hidden">
+             <div className="relative z-10">
+              <div className="w-12 h-12 bg-[#f0f7f0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#006400] transition-colors text-[#006400] group-hover:text-[#FFD700] font-bold">PDF</div>
+              <h4 className="font-black text-2xl uppercase tracking-tighter mb-2">Registration Certificate</h4>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Official Societies Registry • No. 21578</p>
+              <button className="bg-[#006400] text-[#FFD700] px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-lg">Download Credential</button>
             </div>
           </div>
-          
-          <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-4 text-[9px] font-black text-gray-600 uppercase tracking-[0.4em]">
-              <span>© 2002-2026</span>
-              <span className="h-1 w-1 bg-gray-800 rounded-full"></span>
-              <span>Republic of Kenya Official Asset</span>
+          <div className="group p-10 bg-white border border-gray-100 rounded-[2.5rem] shadow-sm hover:shadow-2xl hover:border-[#006400] transition-all relative overflow-hidden">
+             <div className="relative z-10">
+              <div className="w-12 h-12 bg-[#f0f7f0] rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#006400] transition-colors text-[#006400] group-hover:text-[#FFD700] font-bold">DOC</div>
+              <h4 className="font-black text-2xl uppercase tracking-tighter mb-2">KENFIBA Charter</h4>
+              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-8">Constitution & Operational Mandate</p>
+              <button className="bg-[#006400] text-[#FFD700] px-10 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-lg">Download Charter</button>
             </div>
-            <div className="px-6 py-2 bg-white/5 rounded-full border border-white/10">
-              <p className="text-[9px] font-black text-[#FFD700] uppercase tracking-[0.3em]">Institutional Integrity Guaranteed</p>
-            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. SECURITY MODAL */}
+      {showPortalError && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/90 backdrop-blur-2xl">
+          <div className="bg-[#1a0505] text-red-400 p-12 rounded-[2.5rem] max-w-lg border border-red-900/50 shadow-2xl text-center">
+            <div className="text-4xl mb-6">🔒</div>
+            <h3 className="text-2xl font-black uppercase mb-4 text-white">Registry Access Denied</h3>
+            <p className="text-sm opacity-80 mb-8 font-medium italic font-serif leading-relaxed">Access restricted to Ministry of Interior whitelisted IPs only.</p>
+            <button onClick={() => setShowPortalError(false)} className="w-full bg-red-600 text-white py-4 rounded-xl font-black uppercase text-xs">Acknowledge Security Protocol</button>
+          </div>
+        </div>
+      )}
+
+      {/* 8. FOOTER */}
+      <footer className="bg-[#050505] text-white pt-32 pb-16 px-10 border-t-8 border-[#006400]">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-10">
+          <div className="text-center md:text-left">
+            <h2 className="text-2xl font-black tracking-tighter uppercase mb-2 text-[#FFD700]">REPUBLIC OF KENYA</h2>
+            <p className="text-[10px] font-bold text-gray-500 tracking-[0.4em] uppercase">Official Asset of KENFIBA Liaison Office</p>
+          </div>
+          <div className="px-8 py-3 bg-white/5 rounded-full border border-white/10 text-[9px] font-black text-gray-400 uppercase tracking-widest">
+            Registration 21578 • © 2002-2026
           </div>
         </div>
       </footer>
