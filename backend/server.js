@@ -7,25 +7,17 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// --- 1. DATABASE CONNECTION ---
-// --- 1. DATABASE CONNECTION (HARD-WIRED FOR SHARDS) ---
-// Copy this exactly into your backend/server.js
+// --- 1. DATABASE CONNECTION (SHARD-OPTIMIZED) ---
+// We use a 60s timeout because Sharded Clusters on Free Tiers take time to elect a primary.
 mongoose.connect(process.env.MONGO_URI, {
-  serverSelectionTimeoutMS: 60000, // 1 minute timeout for sharded election
+  serverSelectionTimeoutMS: 60000, 
   socketTimeoutMS: 45000,
-  family: 4,                       // Force IPv4 (Crucial for Render-to-Atlas)
+  family: 4, // MANDATORY: Forces IPv4 to bypass Render/Atlas DNS lag
   retryWrites: true,
-  w: 'majority',
-  // Adds stability for Sharded Clusters on Free Tiers
-  connectTimeoutMS: 30000, 
-  keepAlive: true,
-  keepAliveInitialDelay: 300000
+  w: 'majority'
 })
 .then(() => console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED'))
-.catch(err => {
-  console.error('✖ DATABASE BRIDGE BROKEN:', err.message);
-  // This will print the EXACT reason in Render logs (e.g., "bad auth" or "timeout")
-});
+.catch(err => console.error('✖ DATABASE BRIDGE BROKEN:', err.message));
 
 // --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
@@ -39,8 +31,8 @@ const inquirySchema = new mongoose.Schema({
 const Inquiry = mongoose.model('Inquiry', inquirySchema);
 
 // --- 3. MIDDLEWARE ---
-app.use(helmet()); 
-app.use(cors({ origin: '*' })); // Allows Vercel to bypass CORS
+app.use(helmet({ contentSecurityPolicy: false })); // Helmet + Render fix
+app.use(cors({ origin: '*' })); // Full access for the Vercel Bridge
 app.use(express.json());
 
 // --- 4. API ENDPOINTS ---
@@ -54,6 +46,7 @@ app.post('/api/inquiries', async (req, res) => {
     await newInquiry.save();
     res.status(201).json({ success: true, trackingId });
   } catch (error) {
+    console.error("Save Error:", error.message);
     res.status(500).json({ success: false, message: error.message });
   }
 });
