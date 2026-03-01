@@ -6,62 +6,73 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 10000;
 
-// 1. SECURITY & CONNECTION CONFIG
-mongoose.set('bufferCommands', false); // Stop the 10s buffering timeout crash
+// --- 1. THE KENFIBA REGISTRY BRIDGE ---
+mongoose.set('bufferCommands', false); 
 
 const connectDB = async () => {
   try {
-    console.log("📡 INITIALIZING REGISTRY HANDSHAKE...");
+    console.log('📡 INITIALIZING SECURE LINK TO KENFIBA-MAIN-CLUSTER...');
+    
     await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 30000, 
-      heartbeatFrequencyMS: 10000,
-      family: 4 // Force IPv4 for Render
+      family: 4, // Force IPv4 for Render compatibility
     });
+
     console.log('------------------------------------------------');
     console.log('✔ KENFIBA REGISTRY: SECURED & CONNECTED');
+    console.log('✔ USER: jakinda24112007_db_user');
     console.log('------------------------------------------------');
   } catch (err) {
-    console.error('✖ CONNECTION REFUSED:', err.message);
-    console.log('Retrying in 5s...');
+    console.error('------------------------------------------------');
+    console.error('✖ BRIDGE FAILED:', err.message);
+    console.log('------------------------------------------------');
+    // Auto-retry every 5 seconds if the line is busy
     setTimeout(connectDB, 5000);
   }
 };
 
 connectDB();
 
-// 2. SCHEMA & MIDDLEWARE
+// --- 2. DATA SCHEMA ---
 const inquirySchema = new mongoose.Schema({
   trackingId: { type: String, unique: true },
-  name: String, office: String, email: String, details: String,
+  name: { type: String, required: true },
+  office: { type: String, required: true },
+  email: { type: String, required: true },
+  details: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }
 });
 const Inquiry = mongoose.model('Inquiry', inquirySchema);
 
+// --- 3. MIDDLEWARE ---
 app.use(cors({ origin: '*' }));
 app.use(express.json());
 
-// 3. ROUTES
-app.get('/', (req, res) => res.send('🇰🇪 KENFIBA API: ONLINE'));
+// --- 4. API ENDPOINTS ---
+app.get('/', (req, res) => res.status(200).send('🇰🇪 KENFIBA API: SYSTEMS OPERATIONAL'));
 
 app.post('/api/inquiries', async (req, res) => {
   if (mongoose.connection.readyState !== 1) {
-    return res.status(503).json({ success: false, message: "Database is waking up. Retry in 10s." });
+    return res.status(503).json({ success: false, message: "Registry Offline. Reconnecting..." });
   }
   try {
+    const { name, office, email, details } = req.body;
     const trackingId = `KENFIBA-2026-${Math.floor(1000 + Math.random() * 9000)}`;
-    const newEntry = new Inquiry({ ...req.body, trackingId });
-    await newEntry.save();
+    const newInquiry = new Inquiry({ trackingId, name, office, email, details });
+    await newInquiry.save();
     res.status(201).json({ success: true, trackingId });
-  } catch (e) {
-    res.status(500).json({ success: false, message: e.message });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 
 app.get('/api/inquiries', async (req, res) => {
   try {
-    const data = await Inquiry.find().sort({ createdAt: -1 });
-    res.json(data);
-  } catch (e) { res.status(500).send("Unauthorized"); }
+    const all = await Inquiry.find().sort({ createdAt: -1 });
+    res.json(all);
+  } catch (err) {
+    res.status(500).send("Unauthorized Access");
+  }
 });
 
-app.listen(PORT, () => console.log(`🚀 PORTAL ACTIVE ON ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 KENFIBA PORTAL ACTIVE ON PORT ${PORT}`));
