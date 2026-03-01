@@ -75,7 +75,25 @@ function App() {
           </div>
         </div>
       </header>
-
+{/* INJECT: NATIONAL LEADERSHIP */}
+<section id="leadership" className="py-24 px-10 max-w-7xl mx-auto">
+  <h2 className="text-4xl font-black text-gray-900 mb-12 uppercase tracking-tighter">
+    <span className="border-l-8 border-[#006400] pl-4">National Leadership</span>
+  </h2>
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+    {[
+      { role: "National Chairman", name: "Strategic Oversight" },
+      { role: "Secretary General", name: "Administrative Command" },
+      { role: "National Treasurer", name: "Fiscal Registry" },
+      { role: "Organizing Secretary", name: "National Coordination" }
+    ].map((leader, i) => (
+      <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-lg transition-all">
+        <p className="text-[10px] font-black text-[#006400] uppercase mb-2 tracking-widest">{leader.name}</p>
+        <h4 className="text-lg font-black uppercase text-gray-800 leading-tight">{leader.role}</h4>
+      </div>
+    ))}
+  </div>
+</section>
       {/* 4. LEADERSHIP SECTION */}
       <section id="leadership" className="py-32 px-10 max-w-7xl mx-auto">
         <h2 className={styles.sectionTitle}>National <span className="text-[#006400]">Leadership</span></h2>
