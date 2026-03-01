@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+const [isTransmitting, setIsTransmitting] = useState(false);
+const [isSent, setIsSent] = useState(false);
 
 // --- ELITE THEME CONFIG ---
 const styles = {
@@ -17,7 +19,16 @@ function App() {
     const element = document.getElementById(id);
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
-
+const handleTransmit = () => {
+  setIsTransmitting(true);
+  // Simulate a secure government server delay
+  setTimeout(() => {
+    setIsTransmitting(false);
+    setIsSent(true);
+    // Reset after 5 seconds
+    setTimeout(() => setIsSent(false), 5000);
+  }, 2000);
+};
   return (
     <div className="min-h-screen bg-[#FDFDFD] text-gray-900 font-sans selection:bg-[#FFD700]">
       
@@ -322,10 +333,32 @@ function App() {
                     <textarea className="w-full p-6 bg-gray-50 rounded-3xl border-2 border-transparent focus:border-[#006400] focus:bg-white outline-none transition-all font-bold text-sm text-gray-800" rows="5" placeholder="Briefly state the nature of your liaison..."></textarea>
                   </div>
 
-                  <button type="button" className="w-full bg-black text-[#FFD700] py-8 rounded-[2rem] font-black uppercase tracking-[0.5em] shadow-2xl hover:bg-[#006400] hover:text-white transition-all text-sm active:scale-95 flex items-center justify-center gap-4 group">
-                    <span>Submit to National Secretariat</span>
-                    <span className="group-hover:translate-x-2 transition-transform">→</span>
-                  </button>
+                 <button 
+  type="button" 
+  onClick={handleTransmit}
+  disabled={isTransmitting || isSent}
+  className={`w-full py-8 rounded-[2rem] font-black uppercase tracking-[0.5em] shadow-2xl transition-all text-sm flex items-center justify-center gap-4 ${
+    isSent 
+    ? "bg-green-600 text-white cursor-default" 
+    : "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white active:scale-95"
+  }`}
+>
+  {isTransmitting ? (
+    <span className="flex items-center gap-3">
+      <span className="h-4 w-4 border-2 border-[#FFD700] border-t-transparent rounded-full animate-spin"></span>
+      Encrypting & Transmitting...
+    </span>
+  ) : isSent ? (
+    <span className="flex items-center gap-3">
+      ✓ Submission Logged to National Registry
+    </span>
+  ) : (
+    <>
+      <span>Authorize & Transmit to Registry</span>
+      <span className="group-hover:translate-x-2 transition-transform">→</span>
+    </>
+  )}
+</button>
                   
                   <div className="flex justify-center items-center gap-4 pt-4">
                     <div className="h-px w-8 bg-gray-200"></div>
