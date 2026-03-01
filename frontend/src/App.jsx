@@ -105,105 +105,97 @@ function App() {
         </div>
       </section>
 
-     {/* 5. NATIONAL COMMAND DIRECTORY & SECURE TERMINAL */}
+     {/* 5. OFFICIAL CONTACT & COMMUNICATIONS HUB */}
 <section id="contact" className="max-w-7xl mx-auto py-24 px-10">
-  <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+  <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
     
-    {/* LEFT SIDE: COMMAND DIRECTORY */}
-    <div className="lg:col-span-5 space-y-12">
-      <div>
-        <h2 className="text-5xl font-black tracking-tighter uppercase mb-4 leading-none">
-          Contact <br /><span className="text-[#006400]">The Registry.</span>
+    {/* LEFT COLUMN: THE DIRECTORY */}
+    <div className="lg:col-span-5">
+      <div className="mb-12">
+        <h2 className="text-5xl font-black tracking-tighter uppercase mb-4 leading-none text-gray-900">
+          Contact <br /><span className="text-[#006400]">Information.</span>
         </h2>
-        <div className="h-1.5 w-20 bg-[#FFD700] mb-6"></div>
-        <p className="text-[10px] font-black text-gray-500 uppercase tracking-[0.4em]">Operational Support & Liaison</p>
+        <div className="h-1.5 w-20 bg-[#FFD700]"></div>
       </div>
 
-      <div className="space-y-10">
-        {/* Email Authority Block */}
-        <div className="group">
-          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span> 
-            Official Correspondence
-          </h4>
-          <div className="space-y-3">
-            <div className="flex flex-col">
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter italic">Primary Registry</span>
-              <a href="mailto:registry@kenfiba.org" className="text-2xl font-black tracking-tighter text-gray-900 hover:text-[#006400] transition-colors">
+      <div className="space-y-12">
+        {/* EMAIL DIRECTORY */}
+        <div className="flex gap-6">
+          <div className="h-12 w-12 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
+            <svg className="w-6 h-6 text-[#006400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Official Registry Emails</h4>
+            <div className="space-y-1">
+              <a href="mailto:registry@kenfiba.org" className="block text-2xl font-black tracking-tighter text-gray-900 hover:text-[#006400] transition-colors">
                 registry@kenfiba.org
               </a>
-            </div>
-            <div className="flex flex-col">
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-tighter italic">Legacy Archive</span>
-              <a href="mailto:kenfiba@yahoo.com" className="text-xl font-bold tracking-tighter text-gray-500 hover:text-black transition-colors">
+              <a href="mailto:kenfiba@yahoo.com" className="block text-xl font-bold tracking-tighter text-gray-500 hover:text-black">
                 kenfiba@yahoo.com
               </a>
             </div>
           </div>
         </div>
 
-        {/* Telephone Command Block */}
-        <div className="group">
-          <h4 className="text-[10px] font-black text-[#006400] uppercase tracking-widest mb-4 flex items-center gap-3">
-            <span className="h-2 w-2 bg-[#006400] rounded-full animate-pulse"></span> 
-            Direct Command Lines
-          </h4>
-          <div className="grid grid-cols-1 gap-4">
-            <div>
+        {/* TELEPHONE DIRECTORY */}
+        <div className="flex gap-6">
+          <div className="h-12 w-12 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
+            <svg className="w-6 h-6 text-[#006400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Command Lines</h4>
+            <div className="space-y-1">
               <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 722 756 544</p>
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">National Secretariat</span>
-            </div>
-            <div>
               <p className="text-2xl font-black tracking-tighter text-gray-900">+254 (0) 733 841 424</p>
-              <span className="text-[9px] font-black text-gray-400 uppercase tracking-[0.2em]">Liaison Officer</span>
             </div>
+          </div>
+        </div>
+
+        {/* LOCATION */}
+        <div className="flex gap-6">
+          <div className="h-12 w-12 bg-gray-100 rounded-2xl flex items-center justify-center shrink-0">
+            <svg className="w-6 h-6 text-[#006400]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div>
+            <h4 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-2">Physical Headquarters</h4>
+            <p className="text-lg font-bold tracking-tight text-gray-700 leading-tight">
+              Fire & Ambulance HQ, Tom Mboya Street,<br />Nairobi, Kenya
+            </p>
           </div>
         </div>
       </div>
     </div>
 
-    {/* RIGHT SIDE: SECURE SUBMISSION TERMINAL */}
+    {/* RIGHT COLUMN: CONTACT TERMINAL */}
     <div className="lg:col-span-7">
-      <div className="bg-[#0A0A0A] p-12 rounded-[3.5rem] shadow-3xl border border-white/5 relative overflow-hidden group">
-        <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
-          <div className="h-24 w-24 bg-[#006400] rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="relative z-10">
-          <div className="flex justify-between items-center mb-10">
-            <h3 className="text-3xl font-black uppercase tracking-tighter text-white leading-none">
-              Stakeholder <br /><span className="text-[#FFD700]">Terminal</span>
-            </h3>
-            <div className="text-right">
-              <div className="text-[8px] font-black text-green-500 uppercase tracking-widest mb-1 flex items-center justify-end gap-2">
-                <span className="h-1 w-1 bg-green-500 rounded-full"></span> SSL Secure
-              </div>
-              <div className="text-[10px] font-mono text-gray-500 uppercase">SYS-LOG: {new Date().getFullYear()}</div>
-            </div>
+      <div className="bg-white p-12 rounded-[3.5rem] shadow-2xl border border-gray-100 relative">
+        <h3 className="text-3xl font-black uppercase tracking-tighter text-gray-900 mb-8 underline decoration-[#006400] underline-offset-8">Send a Message</h3>
+        <form className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <input className={styles.input} placeholder="Your Full Name" />
+            <input className={styles.input} placeholder="Email Address" />
           </div>
-
-          <form className="space-y-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <input className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" placeholder="Officer Name / Rank" />
-              <input className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" placeholder="Direct Contact Number" />
-            </div>
-            <input className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" placeholder="Organization (Ministry/County/State)" />
-            <textarea className="w-full p-5 bg-white/5 border border-white/10 rounded-2xl text-white font-bold text-sm focus:border-[#FFD700] focus:bg-white/10 outline-none transition-all placeholder:text-gray-600" rows="4" placeholder="Briefly state the nature of your liaison..."></textarea>
-            
-            <button 
-              type="button" 
-              onClick={handleTransmit}
-              disabled={isTransmitting || isSent}
-              className={`w-full py-7 rounded-2xl font-black uppercase tracking-[0.5em] text-xs transition-all shadow-2xl relative overflow-hidden ${
-                isSent ? "bg-green-600 text-white" : "bg-[#FFD700] text-black hover:bg-white active:scale-[0.98]"
-              }`}
-            >
-              <span className="relative z-10">
-                {isTransmitting ? "Encrypting & Logging..." : isSent ? "✓ Transmission Complete" : "Authorize & Transmit"}
-              </span>
-            </button>
-          </form>
-        </div>
+          <input className={styles.input} placeholder="Subject / Department" />
+          <textarea className={styles.input} rows="4" placeholder="How can we assist you?"></textarea>
+          
+          <button 
+            type="button" 
+            onClick={handleTransmit}
+            disabled={isTransmitting || isSent}
+            className={`w-full py-6 rounded-2xl font-black uppercase tracking-[0.4em] text-xs transition-all shadow-xl ${
+              isSent ? "bg-green-600 text-white" : "bg-black text-[#FFD700] hover:bg-[#006400] hover:text-white"
+            }`}
+          >
+            {isTransmitting ? "Sending..." : isSent ? "✓ Message Received" : "Send Official Message"}
+          </button>
+        </form>
       </div>
     </div>
   </div>
