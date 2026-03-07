@@ -330,11 +330,11 @@ export default function App() {
   };
 
   const operations = [
-    { tag: "Capacity Building", title: "Professional Standards Training", sub: "670+ trainees across 12 counties · 2,200+ hours", img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600", tall: true },
-    { tag: "Equipment & Fleet", title: "Fire Engine Assets", sub: "National inventory coordination", img: "https://images.unsplash.com/photo-1582268611958-ebaf16150267?q=80&w=800" },
-    { tag: "Community Safety", title: "Public Outreach", sub: "Nationwide safety campaigns", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800" },
-    { tag: "Legislation", title: "Fire & Rescue Services Bill 2023", sub: "Active national advocacy", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800" },
-    { tag: "Advanced Rescue", title: "Marine & Altitude Modules", sub: "Specialist certification programmes", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800" },
+    { tag: "Training & Capacity Building", title: "Professional Standards Training", sub: "670+ trainees · 12 counties · 193 graduates from Kiambu Training Centre · 52 courses · 2,200+ hours", img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1600", tall: true },
+    { tag: "Equipment & Fleet", title: "Fire Safety Equipment", sub: "Fire engines, extinguishers & personal protective gear furnished to fire service units", img: "https://images.unsplash.com/photo-1582268611958-ebaf16150267?q=80&w=800" },
+    { tag: "Public Policy", title: "Influencing Policy & Legislation", sub: "Working with stakeholders in Kenya, Africa and internationally to influence public policy", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=800" },
+    { tag: "Legislative Advocacy", title: "Fire & Rescue Services Bill 2023", sub: "KENFIBA advocates for enactment of the proposed Fire and Rescue services professionals bill", img: "https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?q=80&w=800" },
+    { tag: "Advanced Rescue", title: "Marine, High Altitude & Medical Rescue", sub: "Advanced pilot activities — high altitude, marine and medical rescue training modules", img: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800" },
   ];
 
   const galleryItems = [
@@ -401,7 +401,7 @@ export default function App() {
             </div>
             <h1 className="hero-title">Kenya National<br />Fire Brigades<br /><em>Association</em></h1>
             <p className="hero-desc">
-              The national peak body supporting and representing fire protection and safety across all 47 counties of the Republic of Kenya.
+              The national peak body in Kenya supporting and representing the fire protection and safety sector — coordinating professional fire and disaster response across the Republic of Kenya.
             </p>
             <p className="hero-motto">KENFIBA Motto: "Support the Firemen — the next life they save might be yours"</p>
             <div className="hero-ctas">
@@ -459,18 +459,18 @@ export default function App() {
         <div className="about-grid">
           <div className="about-content">
             <div className="section-eyebrow"><div className="section-eyebrow-line"></div><span className="section-eyebrow-text">Who We Are</span></div>
-            <h2 className="section-title">National Peak Body for <span>Fire Safety</span></h2>
+            <h2 className="section-title">About <span>KENFIBA</span></h2>
             <p className="about-body">
-              KENFIBA is the national peak body in Kenya supporting and representing fire protection and safety. Established in 2002 by fire officers countrywide and registered at Sheria House under Section 10 of the Societies Act — Charitable No. 21578. The Association serves as the professional voice of Kenya Fire Brigades, assisting and supporting members to fulfill the leadership role in improving the well-being of local communities in all matters related to Fire Service Activities.
+              The Kenya National Fire Brigades Association (KENFIBA) is the national peak body in Kenya supporting and representing the fire protection and safety sector. The Association was established in the year 2002 by fire fighters countrywide and was registered at Sheria House under section "10" of the Societies Act of the laws of the Republic of Kenya — Charitable No. 21578. Its registered office is situated at Tom Mboya Street, Fire and Ambulance Headquarters, Nairobi-Kenya.
             </p>
             <div className="vm-row">
               <div className="vm-pill">
                 <div className="vm-pill-tag">Vision</div>
-                <div className="vm-pill-text">Making Kenya society safer</div>
+                <div className="vm-pill-text">To be the body of reference representing business and professional interest of all Fire and Rescue Services in Kenya.</div>
               </div>
               <div className="vm-pill mission">
                 <div className="vm-pill-tag">Mission</div>
-                <div className="vm-pill-text">To reduce deaths, injuries and property damage caused by Fire and related Hazards.</div>
+                <div className="vm-pill-text">To promote and improve safety and economic growth through good fire and rescue services delivery.</div>
               </div>
             </div>
           </div>
@@ -481,6 +481,33 @@ export default function App() {
               <div className="about-image-tag-num">USD 1M+</div>
               <div className="about-image-tag-label">Total Training Programme Value</div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ASSOCIATION OBJECTIVES — from brochure */}
+      <section className="section section-alt">
+        <div className="section-inner">
+          <div className="section-eyebrow"><div className="section-eyebrow-line"></div><span className="section-eyebrow-text">What We Stand For</span></div>
+          <h2 className="section-title">Association <span>Objectives</span></h2>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20, marginTop: 52 }}>
+            {[
+              { num: "01", title: "Policy Development", desc: "Develop policies on issues which affect our members and through their employing authorities." },
+              { num: "02", title: "Public Policy Influence", desc: "Working in partnership with other stakeholders in order to influence public policy issues in Kenya, Africa and International communities continuously." },
+              { num: "03", title: "Professional Standards", desc: "Improve the professional standards of our members and help attain high level of expertise and effectiveness by developing the knowledge, skills and understanding to ensure competence and provide a range of services for our members." },
+              { num: "04", title: "Training Provision", desc: "Provision of training and enquiry for fire brigade units in Kenya. With each year the percentage of trained recruits is rising — fire service units are also furnished with firefighting and personal equipment." },
+              { num: "05", title: "Crisis Management", desc: "Based on experience gained through study visits, crisis management plans were developed for 5 Kenyan counties covering an area of more than 22,000 sq km and 6 million inhabitants." },
+              { num: "06", title: "Statutory Advocacy", desc: "KENFIBA advocates for the proposed Fire and Rescue services professionals Bill 2023. Once enacted, it will lead the Association's aim to improve fire and rescue services delivery in Kenya." },
+            ].map((o, i) => (
+              <div key={i} style={{ background: "var(--white)", border: "1px solid var(--border)", padding: "32px 28px", transition: "all 0.25s", borderTop: "4px solid transparent", cursor: "default" }}
+                onMouseEnter={e => e.currentTarget.style.borderTopColor = "var(--green)"}
+                onMouseLeave={e => e.currentTarget.style.borderTopColor = "transparent"}
+              >
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 11, fontWeight: 700, color: "var(--green)", letterSpacing: "0.2em", marginBottom: 12 }}>Objective {o.num}</div>
+                <div style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 20, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em", color: "var(--green-dark)", marginBottom: 10 }}>{o.title}</div>
+                <div style={{ fontSize: 13, lineHeight: 1.75, color: "var(--sub)" }}>{o.desc}</div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -516,12 +543,12 @@ export default function App() {
         <div className="section-inner">
           <div className="section-eyebrow"><div className="section-eyebrow-line"></div><span className="section-eyebrow-text">Global Alliances</span></div>
           <h2 className="section-title">International <span>Partners</span></h2>
-          <p className="section-subtitle">KENFIBA maintains active international partnerships for training, equipment, and knowledge exchange.</p>
+          <p className="section-subtitle">KENFIBA works in partnership with international bodies for training, equipment donations and knowledge exchange to improve fire service standards in Kenya.</p>
           <div className="partners-grid">
             {[
-              { flag: "🇸🇰", country: "Slovak Republic", badge: "Active Partner", detail: "The Slovak Republic Embassy in Kenya facilitated fire engine and equipment donations via the Slovak-Aid wing. KENFIBA delegates undertook a formal study visit to Slovakia to benchmark fire services management practices." },
-              { flag: "🇸🇬", country: "Singapore", badge: "Equipment Partner", detail: "Singapore Civil Defence Force (SCDF) — Directorate of Fire Safety Services — serves as a shipping partner for fire engines, extinguishers and safety equipment, supporting KENFIBA's fleet development nationally." },
-              { flag: "🇵🇱", country: "Poland", badge: "Training Partner Since 2014", detail: "Polish Aid Programme via the Ministry of Foreign Affairs — formal firemen/women training programme operating since 2014, including a formal study visit to Poland for KENFIBA delegation members." },
+              { flag: "🇸🇰", country: "Slovak Republic", badge: "Active Partner", detail: "On 23rd October 2022, KENFIBA with support of the Slovak Republic Embassy in Kenya went for a study visit to Slovakia, sponsored by the Slovak-Aid wing. KENFIBA was given donations of fire engines and other equipment including extinguishers from the Directorate of fire safety services." },
+              { flag: "🇸🇬", country: "Singapore", badge: "Equipment Partner", detail: "Singapore SCDF (Directorate of fire safety services) is a shipping partner for fire engines and other equipment that KENFIBA needs. The partnership supports fleet and safety equipment development for fire brigade units across Kenya." },
+              { flag: "🇵🇱", country: "Poland", badge: "Training Partner Since 2014", detail: "Aided by the MFA in the Polish Aid programme, KENFIBA has been working since 2014 to improve professional training for firemen and women. A study visit to Poland took place in 2018 where KENFIBA learnt a lot from fire services management across several Polish cities." },
             ].map((p, i) => (
               <div className="partner-card" key={i}>
                 <span className="partner-flag">{p.flag}</span>
@@ -541,10 +568,10 @@ export default function App() {
           <h2 className="section-title">Membership <span>Benefits</span></h2>
           <div className="membership-grid">
             {[
-              { num: "01", icon: "⚖️", title: "Advocacy", desc: "Close liaison with the government — KENFIBA lobbies for better fire and rescue legislation and policy, including active advocacy for the Fire & Rescue Services Bill 2023." },
-              { num: "02", icon: "🎓", title: "Capacity Building", desc: "KENFIBA runs well-coordinated local and international industry-specific training. Access to Kenya-wide and global fire and rescue professional networks." },
-              { num: "03", icon: "💼", title: "Business Support", desc: "Identification and sharing of business opportunities. Members enjoy discounted rates across industry products, services, and professional development activities." },
-              { num: "04", icon: "🤝", title: "Networking", desc: "Regional and international fire and rescue knowledge exchange. KENFIBA organises professional events both locally and internationally throughout the calendar year." },
+              { num: "01", icon: "⚖️", title: "Advocacy", desc: "Close liaison with the government — KENFIBA policies issues lobbying for better laws and other industry players in making legislative policies. Members benefit from direct government engagement on fire and rescue matters." },
+              { num: "02", icon: "🎓", title: "Capacity Building", desc: "KENFIBA has well-coordinated local and international industry-specific training for members. Access to identification and sharing of regional and international fire and rescue training opportunities." },
+              { num: "03", icon: "💼", title: "Business Support", desc: "Business support to members — identification and sharing of business opportunities. Access to regional and international business opportunities. Members enjoy discounted rates on local and international industry products and services." },
+              { num: "04", icon: "🤝", title: "Networking", desc: "Networking and sharing of knowledge — database of regional and international fire and rescue firms. KENFIBA organises a number of events throughout the year both locally and internationally." },
             ].map((b, i) => (
               <div className="membership-card" key={i}>
                 <div className="membership-num">{b.num}</div>
@@ -562,7 +589,7 @@ export default function App() {
         <div className="section-inner">
           <div className="section-eyebrow"><div className="section-eyebrow-line"></div><span className="section-eyebrow-text">Executive Committee</span></div>
           <h2 className="section-title">National <span>Leadership</span></h2>
-          <p className="section-subtitle">The Association is governed by an elected Executive Committee of nationally serving fire officers.</p>
+          <p className="section-subtitle">The Association is governed by an elected Executive Committee of fire officers drawn from across Kenya.</p>
           <div className="leadership-grid">
             {[
               { num: "01", role: "National Chairman", desc: "Supreme authority and strategic direction of the Association at national level." },
