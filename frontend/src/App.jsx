@@ -134,7 +134,88 @@ function App() {
     </div>
   </div>
 </section>
-{/* THE FULL GALLERY OVERLAY/SUBPAGE */}
+{/* PROPERTY INTELLIGENCE RESULTS */}
+{properties.length > 0 && (
+  <div className="max-w-7xl mx-auto px-10 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+    {properties.map((p, i) => (
+      <div key={i} className="group relative bg-white rounded-[2rem] overflow-hidden border border-gray-100 shadow-sm hover:shadow-2xl transition-all">
+        <img src={p.primary_photo?.href} alt="Real Estate" className="w-full h-48 object-cover group-hover:scale-105 transition-transform" />
+        <div className="p-6">
+          <div className="flex justify-between items-start mb-2">
+            <h4 className="font-black text-xl text-gray-900">${p.list_price}</h4>
+            <span className="text-[9px] font-black text-[#006400] bg-[#f0f7f0] px-3 py-1 rounded-full uppercase italic">Verified</span>
+          </div>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{p.location?.address?.city}, {p.location?.address?.line}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+{/* 4. OPERATIONS BENTO GRID - Mapped to Your Shared Photos */}
+<section className="max-w-7xl mx-auto py-24 px-10">
+  <div className="flex justify-between items-end mb-16">
+    <div className="space-y-4">
+      <h2 className="text-6xl font-black tracking-tighter uppercase leading-[0.8] text-gray-900">
+        National <br /><span className="text-[#006400]">Operations.</span>
+      </h2>
+      <div className="h-1.5 w-24 bg-[#FFD700]"></div>
+    </div>
+    <button 
+      onClick={() => setView('gallery')}
+      className="px-8 py-4 bg-black text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-full hover:bg-[#006400] transition-all shadow-xl"
+    >
+      Open Visual Archive
+    </button>
+  </div>
+
+  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 h-[800px]">
+    {/* PILLAR 1: Training (From Brochure) */}
+    <div className="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-[3rem] bg-gray-100 border border-gray-200 shadow-2xl">
+      <img 
+        src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1600" 
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" 
+        alt="Kenyan Firefighters Training" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-10 flex flex-col justify-end">
+        <span className="text-[#FFD700] text-[10px] font-black uppercase tracking-widest mb-2">Capacity Building</span>
+        <h4 className="text-white text-3xl font-black uppercase tracking-tighter">Professional Standards Training</h4>
+        <p className="text-gray-400 text-sm mt-2 max-w-xs">Standardized curriculum as per KENFIBA Charter requirements.</p>
+      </div>
+    </div>
+
+    {/* PILLAR 2: Fleet (From Brochure) */}
+    <div className="relative group overflow-hidden rounded-[3rem] bg-gray-100 border border-gray-200">
+      <img 
+        src="https://images.unsplash.com/photo-1582268611958-ebaf16150267?q=80&w=800" 
+        className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" 
+        alt="Fire Engine Fleet" 
+      />
+      <div className="absolute top-6 left-6 h-10 w-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white font-black text-xs italic">Asset</div>
+    </div>
+
+    {/* PILLAR 3: Community Outreach */}
+    <div className="relative group overflow-hidden rounded-[3rem] bg-gray-100 border border-gray-200">
+      <img 
+        src="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?q=80&w=800" 
+        className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+        alt="Community Safety" 
+      />
+    </div>
+
+    {/* PILLAR 4: Strategic Advocacy */}
+    <div className="md:col-span-2 relative group overflow-hidden rounded-[3rem] bg-black border border-white/10 shadow-3xl">
+      <img 
+        src="https://images.unsplash.com/photo-1502740479091-635887520276?q=80&w=1200" 
+        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-all duration-1000" 
+        alt="Legislative Liaison" 
+      />
+      <div className="absolute inset-0 flex items-center justify-center text-center p-10">
+        <h4 className="text-white text-4xl font-black uppercase tracking-widest italic scale-y-125">National Advocacy</h4>
+      </div>
+    </div>
+  </div>
+</section>
+/* THE FULL GALLERY OVERLAY/SUBPAGE */
 {view === 'gallery' && (
   <div className="fixed inset-0 z-[100] bg-white overflow-y-auto p-10 animate-in fade-in slide-in-from-bottom-10 duration-500">
     <div className="max-w-7xl mx-auto">
